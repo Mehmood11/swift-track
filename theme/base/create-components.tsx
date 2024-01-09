@@ -219,6 +219,7 @@ export const createComponents = ({
         input: {
           "&::placeholder": {
             opacity: 1,
+            color: "black",
           },
         },
       },
@@ -240,7 +241,10 @@ export const createComponents = ({
           borderStyle: "solid",
           borderWidth: 1,
           overflow: "hidden",
-          transition: muiTheme.transitions.create(["border-color", "box-shadow"]),
+          transition: muiTheme.transitions.create([
+            "border-color",
+            "box-shadow",
+          ]),
           "&:before": {
             display: "none",
           },
@@ -263,7 +267,10 @@ export const createComponents = ({
           lineHeight: "24px",
         },
         notchedOutline: {
-          transition: muiTheme.transitions.create(["border-color", "box-shadow"]),
+          transition: muiTheme.transitions.create([
+            "border-color",
+            "box-shadow",
+          ]),
         },
       },
     },
@@ -451,7 +458,9 @@ export const createComponents = ({
       },
       styleOverrides: {
         root: {
-          "& .MuiOutlinedInput-root": {},
+          "& .MuiOutlinedInput-root": {
+            color: "black",
+          },
         },
       },
     },
