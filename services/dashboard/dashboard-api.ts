@@ -3,8 +3,8 @@ import { baseApi } from "../base-api";
 export const dashboardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     dashboardList: builder.query({
-      query: () => ({
-        url: "revenue",
+      query: ({ type }) => ({
+        url: `revenue?type=${type}`,
         method: "GET",
       }),
     }),

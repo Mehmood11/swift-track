@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import React, { useState } from "react";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { makeStyles } from "@mui/styles";

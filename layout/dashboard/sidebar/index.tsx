@@ -19,19 +19,19 @@ import { useDispatch, useSelector } from "@/store";
 import { authActions } from "@/slices";
 import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
+import { styled } from "@mui/system";
 
-const useStyles = makeStyles((theme: any) => ({
+const MobileDrawerStyle = styled(Drawer)((theme) => ({
   mobileDrawer: {
     width: 330,
-    // backgroundColor: theme.palette.primary.main,
   },
+}));
+const DesktopDrawerStyle = styled(Drawer)((theme) => ({
   desktopDrawer: {
     top: 0,
     width: 330,
     height: "100%",
-    // backgroundColor: theme.palette.primary.main,
-    // height: 'calc(100% - 64px)',
   },
 }));
 
@@ -39,7 +39,6 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
   const router = useRouter();
   const theme = useTheme();
   const pathname = usePathname();
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const sidebarLinks = [
@@ -235,25 +234,25 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
   return (
     <>
       <Hidden mdUp>
-        <Drawer
+        <MobileDrawerStyle
           anchor="left"
-          classes={{ paper: classes.mobileDrawer }}
+          // classes={{ paper: classes.mobileDrawer }}
           onClose={onMobileClose}
           open={openMobile}
           variant="temporary"
         >
           {content}
-        </Drawer>
+        </MobileDrawerStyle>
       </Hidden>
       <Hidden mdDown>
-        <Drawer
+        <DesktopDrawerStyle
           anchor="left"
-          sx={{ paper: classes.desktopDrawer }}
+          // sx={{ paper: classes.desktopDrawer }}
           open
           variant="persistent"
         >
           {content}
-        </Drawer>
+        </DesktopDrawerStyle>
       </Hidden>
     </>
   );

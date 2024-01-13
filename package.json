@@ -9,12 +9,13 @@
     "lint": "next lint -p 5000"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
+    "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.3",
     "@mui/lab": "^5.0.0-alpha.159",
     "@mui/material": "^5.15.3",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.12",
     "@mui/styles": "^5.15.4",
     "@mui/x-date-pickers": "^6.18.7",
     "@reduxjs/toolkit": "^2.0.1",

@@ -6,7 +6,7 @@ import { DonutChart } from "./donut-chart";
 import { useDashboardListQuery } from "@/services/dashboard/dashboard-api";
 
 export function Dashboard(): JSX.Element {
-  const { data }: any = useDashboardListQuery(null);
+  const { data }: any = useDashboardListQuery({ type: "weekly" });
   console.log(data);
   return (
     <Box>
