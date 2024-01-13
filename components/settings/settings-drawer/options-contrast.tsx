@@ -1,7 +1,7 @@
+import type { Contrast } from "@/components/types/theme";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import type { Contrast } from "common/types";
 
 interface Option {
   label: string;

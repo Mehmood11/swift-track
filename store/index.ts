@@ -34,10 +34,10 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state: any, action: any): any => {
-  console.log('action in store', action);
-  
+  console.log("action in store", action);
+
   // Clear all data in redux store to initial.
-  if (action.type === "Auth/logout") {
+  if (action.type === "auth/logout") {
     state = undefined;
     // Step 2: Before Logging Out
     const rememberMeData = getLocalStorage("rememberMe");

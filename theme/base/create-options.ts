@@ -2,7 +2,7 @@ import type { ThemeOptions } from "@mui/material/styles/createTheme";
 
 import { createTypography } from "./create-typography";
 import { createComponents } from "./create-components";
-import type { Direction } from "common/types";
+import type { Direction } from "@/components/types/theme";
 
 interface Config {
   direction?: Direction;

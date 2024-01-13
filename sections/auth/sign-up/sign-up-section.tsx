@@ -6,27 +6,51 @@ import { RHFTextField } from "@/components/rhf/rhf-textfield";
 import { useForm } from "react-hook-form";
 import LoginIcon from "@mui/icons-material/Login";
 import Link from "next/link";
-import { useLoginMutation } from "@/services/auth/auth-api";
+import { useSignupMutation } from "@/services/auth/auth-api";
 import toast from "react-hot-toast";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
+import { LoadingButton } from "@mui/lab";
 
 export function SignUpSection(): JSX.Element {
-  const [loginMutation] = useLoginMutation();
-  const methods = useForm({
+  const router = useRouter();
+  const [signUpMutation, { isLoading }] = useSignupMutation();
+  const methods = useForm<any>({
     defaultValues: {
       username: "",
       email: "",
       password: "",
     },
+    resolver: yupResolver(
+      Yup.object().shape({
+        username: Yup.string()
+          .matches(
+            /^[a-z0-9]{6,20}$/,
+            "Username must be between 6 and 20 characters, and can only contain small alphabets and numbers."
+          )
+          .required("Username is required"),
+        email: Yup.string()
+          .email("Invalid email address")
+          .required("Email is required"),
+        password: Yup.string()
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%^&*?])[A-Za-z\d@$!%^&*?]{8,}$/,
+            "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
+          )
+          .required("Password is required"),
+      })
+    ),
   });
 
   const { handleSubmit } = methods;
 
   const loginHandler = async (data: any) => {
     try {
-      const res: any = await loginMutation(data);
-      toast.success(res?.data?.message ?? `Update Successfully!`);
-      console.log(res);
-    } catch (error) {
+      const res: any = await signUpMutation(data);
+      toast.success(res?.data?.message ?? `Signed Up Successfully!`);
+      router.push("/login");
+    } catch (error: any) {
       toast.error(error?.message ?? "Something went wrong");
     }
   };
@@ -75,16 +99,17 @@ export function SignUpSection(): JSX.Element {
             </Grid>
             <Grid item xs={12} mt={2}>
               <RHFTextField
-                name="password"
-                placeholder="Password"
-                outerLabel="Password"
+                name="email"
+                placeholder="Email"
+                outerLabel="Email"
               />
             </Grid>
             <Grid item xs={12} mt={2}>
               <RHFTextField
-                name="email"
-                placeholder="Email"
-                outerLabel="Email"
+                type="password"
+                name="password"
+                placeholder="Password"
+                outerLabel="Password"
               />
             </Grid>
             <Grid item xs={12} mt={2} sx={{ color: "black" }}>
@@ -93,7 +118,8 @@ export function SignUpSection(): JSX.Element {
               </Typography>
             </Grid>
             <Grid item xs={12} mt={2}>
-              <Button
+              <LoadingButton
+                loading={isLoading}
                 fullWidth
                 variant="contained"
                 startIcon={<LoginIcon />}
@@ -101,7 +127,7 @@ export function SignUpSection(): JSX.Element {
               >
                 {" "}
                 Sign Up
-              </Button>
+              </LoadingButton>
             </Grid>
           </Grid>
         </FormProvider>

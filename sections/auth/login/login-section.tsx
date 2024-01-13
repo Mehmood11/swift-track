@@ -19,22 +19,22 @@ export function LoginSection(): JSX.Element {
       username: "",
       password: "",
     },
-    // resolver: yupResolver(
-    //   Yup.object().shape({
-    //     username: Yup.string()
-    //       .matches(
-    //         /^[a-z0-9]{6,20}$/,
-    //         "Username must be between 8 and 20 characters, and can only contain small alphabets and numbers."
-    //       )
-    //       .required("Username is required"),
-    //     password: Yup.string()
-    //       .matches(
-    //         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    //         "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
-    //       )
-    //       .required("Password is required"),
-    //   })
-    // ),
+    resolver: yupResolver(
+      Yup.object().shape({
+        username: Yup.string()
+          .matches(
+            /^[a-z0-9]{6,20}$/,
+            "Username must be between 8 and 20 characters, and can only contain small alphabets and numbers."
+          )
+          .required("Username is required"),
+        password: Yup.string()
+          .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%^&*?])[A-Za-z\d@$!%^&*?]{8,}$/,
+            "Password must be at least 8 characters long and contain at least one lowercase letter, one uppercase letter, one number, and one special character."
+          )
+          .required("Password is required"),
+      })
+    ),
   });
 
   const { handleSubmit } = methods;
@@ -49,7 +49,7 @@ export function LoginSection(): JSX.Element {
     } catch (error: any) {
       console.log(error);
 
-      toast.error(error?.data?.message ?? "went wrong");
+      toast.error(error?.data?.message ?? "Something went wrong");
     }
   };
   return (
@@ -97,6 +97,7 @@ export function LoginSection(): JSX.Element {
             </Grid>
             <Grid item xs={12} mt={2}>
               <RHFTextField
+                type="password"
                 name="password"
                 placeholder="Password"
                 outerLabel="Password"

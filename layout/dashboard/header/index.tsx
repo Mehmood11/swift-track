@@ -12,6 +12,7 @@ import {
   Breadcrumbs,
   useTheme,
   Popover,
+  Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
@@ -135,39 +136,17 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
                 py: 0,
               }}
             >
-              <Box sx={{ position: "relative", display: "flex" }}>
-                {/* <Image
-                  src={NotificationsIcon.src}
-                  alt="Profile Image"
-                  height={18}
-                  width={18}
-                  //   onClick={() => setNotification(true)}
-                  style={{
-                    marginLeft: "10px",
-                    marginRight: "10px",
-                    cursor: "pointer",
-                  }}
-                /> */}
+              <Box
+                sx={{
+                  position: "relative",
+                  display: "flex",
+                }}
+              >
                 <NotificationsIcon />
-                {/* {
-                  <Box
-                    sx={{
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "10px",
-                      animation: `${blinker} 2s linear infinite`,
-                      backgroundColor: "red",
-                      marginRight: "5px",
-                      position: "absolute",
-                      top: -6,
-                      right: 2,
-                    }}
-                  ></Box>
-                } */}
               </Box>
-              <Box onClick={handleClick}>
+              <Button aria-describedby={id} onClick={handleClick} sx={{ p: 0 }}>
                 <PersonIcon />
-              </Box>
+              </Button>
               <Popover
                 id={id}
                 open={open}
@@ -182,19 +161,6 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
                   The content of the Popover.
                 </Typography>
               </Popover>
-              {/* <Image
-                src={<PersonIcon />}
-                alt="Profile Image"
-                height={30}
-                width={30}
-                style={{
-                  marginLeft: "6px",
-                  cursor: "pointer",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                }}
-                // onClick={() => setAccountDetails(true)} */}
-              {/* /> */}
             </Box>
           </Grid>
         </Grid>

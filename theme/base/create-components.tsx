@@ -74,7 +74,7 @@ export const createComponents = ({
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          fontFamily: "inherit",
+          // fontFamily: "inherit",
         },
       },
     },
@@ -459,7 +459,10 @@ export const createComponents = ({
       styleOverrides: {
         root: {
           "& .MuiOutlinedInput-root": {
-            color: "black",
+            color:
+              muiTheme.palette.mode === "dark"
+                ? muiTheme.palette.grey[500]
+                : muiTheme.palette.grey[500],
           },
         },
       },

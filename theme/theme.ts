@@ -8,7 +8,7 @@ import {
 import { createOptions as createBaseOptions } from "./base/create-options";
 import { createOptions as createDarkOptions } from "./dark/create-options";
 import { createOptions as createLightOptions } from "./light/create-options";
-import { ThemeConfig } from "@/components/types/theme";
+import type { ThemeConfig } from "@/components/types/theme";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {

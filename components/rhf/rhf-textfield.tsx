@@ -1,3 +1,4 @@
+"use client";
 // @mui
 import {
   FormLabel,
@@ -52,7 +53,7 @@ export function RHFTextField({
       render={({ field, fieldState: { error } }) => (
         <Stack gap="0.6rem">
           {outerLabel && (
-            <FormLabel sx={{ color: "black" }}>{outerLabel}</FormLabel>
+            <FormLabel >{outerLabel}</FormLabel>
           )}
           <TextField
             {...field}

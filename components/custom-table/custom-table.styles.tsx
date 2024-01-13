@@ -81,7 +81,7 @@ export const styles = {
   currentPage: (theme: any) => ({
     color: theme.palette.grey[600],
     fontSize: "12px",
-    fontFamily: theme.typography.fontFamily,
+    // fontFamily: theme.typography.fontFamily,
   }),
   error: (theme: any) => ({
     background: theme.palette.background.default,
@@ -92,10 +92,7 @@ export const styles = {
   pagination: (theme: any) => ({
     ".Mui-selected": {
       backgroundColor: `${theme.palette.primary.main} !important`,
-      color:
-        theme.palette.mode === "light"
-          ? theme.palette
-          : theme.palette.grey[800],
+      color: theme.palette.mode === "light" ? "white" : theme.palette.grey[800],
     },
   }),
 };

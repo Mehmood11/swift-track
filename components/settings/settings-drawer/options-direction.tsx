@@ -5,7 +5,7 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import SvgIcon from "@mui/material/SvgIcon";
 import Typography from "@mui/material/Typography";
-import type { Direction } from "common/types";
+import type { Direction } from "@/components/types/theme";
 
 interface Option {
   label: string;

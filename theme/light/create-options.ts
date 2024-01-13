@@ -3,7 +3,7 @@ import type { ThemeOptions } from "@mui/material/styles/createTheme";
 import { createComponents } from "./create-components";
 import { createPalette } from "./create-palette";
 import { createShadows } from "./create-shadows";
-import type { ColorPreset, Contrast } from "common/types";
+import type { ColorPreset, Contrast } from "@/components/types/theme";
 
 interface Config {
   colorPreset?: ColorPreset;

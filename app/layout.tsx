@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
 import "./globals.css";
 import { Layout } from "@/layout/root";
 import { Settings } from "@/components/types/settings";

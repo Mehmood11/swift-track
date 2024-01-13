@@ -1,8 +1,10 @@
 import { BASE_URL } from "@/config";
 import type { RootState } from "@/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+export const REPORTS: any = "REPORTS";
+export const ORDERS: any = "ORDERS";
 
-const TAGS: any = [];
+const TAGS: any = [REPORTS, ORDERS];
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
@@ -12,6 +14,7 @@ const baseQuery = fetchBaseQuery({
 
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
+      headers.set("ngrok-skip-browser-warning", "69420");
     }
     return headers;
   },

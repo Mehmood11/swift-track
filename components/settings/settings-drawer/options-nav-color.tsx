@@ -1,8 +1,7 @@
+import type { NavColor } from "@/components/types/settings";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import type { NavColor } from "common/types";
-
 interface Option {
   label: string;
   value: NavColor;

@@ -21,52 +21,6 @@ import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { makeStyles } from "@mui/styles";
 
-const sidebarLinks = [
-  {
-    id: 1,
-    title: "Dashboard",
-    value: "Dashboard",
-    icon: <Dashboard />,
-    href: "/dashboard",
-  },
-  {
-    id: 2,
-    title: "Clients",
-    value: "Clients",
-    icon: <SupervisorAccountIcon />,
-    href: "/clients",
-  },
-  {
-    id: 3,
-    title: "Orders",
-    value: "Orders",
-    icon: <Dashboard />,
-    href: "/orders",
-  },
-  {
-    id: 4,
-    title: "Driver",
-    value: "Driver",
-    icon: <Dashboard />,
-    href: "/driver",
-  },
-  {
-    id: 5,
-    title: "Reports",
-    value: "Reports",
-    icon: <BarChartIcon />,
-    href: "/reports",
-  },
-
-  {
-    id: 6,
-    title: "Notifications",
-    value: "Notification",
-    icon: <Notifications />,
-    href: "/notifications",
-  },
-];
-
 const useStyles = makeStyles((theme: any) => ({
   mobileDrawer: {
     width: 330,
@@ -85,23 +39,94 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
   const router = useRouter();
   const theme = useTheme();
   const pathname = usePathname();
-
   const classes = useStyles();
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (openMobile && onMobileClose) {
-      onMobileClose();
-    }
-  }, [router]);
+
+  const sidebarLinks = [
+    {
+      id: 1,
+      title: "Dashboard",
+      value: "Dashboard",
+      icon() {
+        return (
+          <Dashboard sx={{ color: pathname == this.href ? "white" : "" }} />
+        );
+      },
+      href: "/dashboard",
+    },
+    {
+      id: 2,
+      title: "Clients",
+      value: "Clients",
+      icon() {
+        return (
+          <SupervisorAccountIcon
+            sx={{ color: pathname == this.href ? "white" : "" }}
+          />
+        );
+      },
+      href: "/clients",
+    },
+    {
+      id: 3,
+      title: "Orders",
+      value: "Orders",
+      icon() {
+        return (
+          <Dashboard sx={{ color: pathname == this.href ? "white" : "" }} />
+        );
+      },
+      href: "/orders",
+    },
+    {
+      id: 4,
+      title: "Driver",
+      value: "Driver",
+      icon() {
+        return (
+          <Dashboard sx={{ color: pathname == this.href ? "white" : "" }} />
+        );
+      },
+      href: "/driver",
+    },
+    {
+      id: 5,
+      title: "Reports",
+      value: "Reports",
+      icon() {
+        return (
+          <BarChartIcon sx={{ color: pathname == this.href ? "white" : "" }} />
+        );
+      },
+      href: "/reports",
+    },
+
+    {
+      id: 6,
+      title: "Notifications",
+      value: "Notification",
+      icon() {
+        return (
+          <Notifications sx={{ color: pathname == this.href ? "white" : "" }} />
+        );
+      },
+      href: "/notifications",
+    },
+  ];
 
   const handleLogout = async () => {
     try {
       dispatch(authActions.logout());
       router.push("/login");
-    } catch (error) {
-      toast.error(error?.message ?? "error occured");
+    } catch (error: any) {
+      toast.error(error?.data?.message ?? "error occured");
     }
   };
+  useEffect(() => {
+    if (openMobile && onMobileClose) {
+      onMobileClose();
+    }
+  }, [router]);
 
   const content = (
     <Box
@@ -152,7 +177,7 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
                 color:
                   theme.palette.mode === "dark"
                     ? "white"
-                    : theme.palette.neutral[800],
+                    : theme.palette.neutral[900],
                 textDecoration: "none",
                 fontWeight: "500",
                 fontSize: "16px",
@@ -163,8 +188,20 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
               passHref
               href={config.href}
             >
-              {config.icon}
-              <Typography sx={{ pl: 1 }}>{config.title}</Typography>
+              {config.icon()}
+              <Typography
+                sx={{
+                  pl: 1,
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  color:
+                    pathname == config.href || theme.palette.mode === "dark"
+                      ? "white"
+                      : theme.palette.neutral[800],
+                }}
+              >
+                {config.title}
+              </Typography>
             </Link>
           </Box>
         ))}
@@ -175,12 +212,11 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
           justifyContent: "center",
           alignSelf: "center",
           mb: 5,
-          // width: "80%",
+          width: "80%",
           color: "white",
           fontSize: "16px",
           fontWeight: "500",
           borderRadius: "6px",
-          fontFamily: "Poppins",
           backgroundColor: "primary.main",
         }}
       >
@@ -188,6 +224,7 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
           startIcon={<LogoutIcon />}
           variant="contained"
           onClick={handleLogout}
+          fullWidth
         >
           Logout
         </Button>
