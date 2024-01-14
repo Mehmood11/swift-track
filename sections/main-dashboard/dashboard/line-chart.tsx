@@ -1,14 +1,14 @@
 import { useTheme } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
-export function LineChart() {
-  const theme = useTheme();
 
-  const [chartOptions, setChartOptions] = useState<any>({
+export function LineChart({ data }: any): JSX.Element {
+  const theme = useTheme();
+  const [chartState, setChartState] = useState<any>({
     series: [
       {
         name: "monthly",
-        data: [12, 11, 100, 18, 17, 13, 13, 2, 43, 5, 77, 22],
+        data: [],
       },
     ],
     chart: {
@@ -80,7 +80,7 @@ export function LineChart() {
       //   text: "Temperature",
       // },
       min: 5,
-      max: 150,
+      // max: 150,
     },
     legend: {
       position: "top",
@@ -90,10 +90,27 @@ export function LineChart() {
       offsetX: -5,
     },
   });
+  // const chartOptions = ;
+  useEffect(() => {
+    // Update the series data with the loaded chartData
+    if (data) {
+      const newSeries = [
+        {
+          name: "monthly",
+          data: data.map((val: any) => val?.y),
+        },
+      ];
+
+      setChartState((prevChartState: any) => ({
+        ...prevChartState,
+        series: newSeries,
+      }));
+    }
+  }, [data]);
   return (
     <Chart
-      options={chartOptions}
-      series={chartOptions.series}
+      options={chartState}
+      series={chartState.series}
       type="line"
       height={350}
     />

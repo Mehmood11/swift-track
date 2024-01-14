@@ -3,10 +3,10 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { LineChart } from "./line-chart";
 import { DonutChart } from "./donut-chart";
-import { useDashboardListQuery } from "@/services/dashboard/dashboard-api";
+import { useLazyDashboardListQuery } from "@/services/dashboard/dashboard-api";
 
 export function Dashboard(): JSX.Element {
-  const { data }: any = useDashboardListQuery({ type: "weekly" });
+  const [revenueChartTrigger, { data }] = useLazyDashboardListQuery();
   console.log(data);
   return (
     <Box>
@@ -133,13 +133,26 @@ export function Dashboard(): JSX.Element {
               display={"flex"}
               justifyContent={"flex-end"}
             >
-              <Button variant="contained">Monthly</Button>
-              <Button variant="contained" sx={{ ml: 1 }}>
+              <Button
+                variant="contained"
+                onClick={async () =>
+                  await revenueChartTrigger({ type: "month" })
+                }
+              >
+                Monthly
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ ml: 1 }}
+                onClick={async () =>
+                  await revenueChartTrigger({ type: "week" })
+                }
+              >
                 Weekly
               </Button>
             </Grid>
           </Grid>
-          <LineChart />
+          <LineChart data={data} />
         </Grid>
         <Grid
           item

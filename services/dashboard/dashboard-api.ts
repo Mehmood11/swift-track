@@ -11,4 +11,4 @@ export const dashboardApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useDashboardListQuery } = dashboardApi;
+export const { useDashboardListQuery , useLazyDashboardListQuery} = dashboardApi;
