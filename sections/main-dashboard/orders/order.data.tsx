@@ -114,7 +114,7 @@ export const columnsFunction = (deleteOrders: any) => {
       accessorFn: (row: any) => row.generated_by ?? "-",
       id: "generated_by",
       cell: (info: any) => (
-        <>
+        <div style={{ display: "flex" }}>
           <OrdersModal orderValue={info?.row?.original} />
           <DeleteIcon
             sx={{ color: "error.main", cursor: "pointer" }}
@@ -129,7 +129,7 @@ export const columnsFunction = (deleteOrders: any) => {
               }
             }}
           />
-        </>
+        </div>
       ),
       header: () => <span>Action</span>,
       isSortable: false,

@@ -1,9 +1,7 @@
-import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
 export function LineChart({ data }: any): JSX.Element {
-  const theme = useTheme();
   const [chartState, setChartState] = useState<any>({
     series: [
       {

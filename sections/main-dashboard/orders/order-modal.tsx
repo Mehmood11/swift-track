@@ -35,20 +35,16 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
 
   const clientList = useLazyClientListQuery();
   const [updateOrders] = useUpdateOrdersMutation();
-  console.log("orderValue", parseISO(orderValue?.scheduled_pickup_time));
+  console.log("orderValue", orderValue);
 
+  // status, shipping address,  vehicle no, quantity loaded or offloaded.
   const methods = useForm({
     defaultValues: {
-      contract_id: orderValue?.contract_id ?? "",
       client_id: null,
       pickup_address: orderValue?.pickup_address ?? "",
       delivery_address: orderValue?.delivery_address ?? "",
-      scheduled_pickup_time: orderValue?.scheduled_pickup_time
-        ? parseISO(orderValue?.scheduled_pickup_time)
-        : new Date(),
-      scheduled_delivery_time: orderValue?.scheduled_delivery_time
-        ? parseISO(orderValue?.scheduled_delivery_time)
-        : new Date(),
+      quantity_loaded: orderValue?.quantity_loaded ?? 0,
+      quantity_offloaded: orderValue?.quantity_offloaded ?? 0,
       status: orderValue?.status ?? "pending_loading",
     },
   });
@@ -56,13 +52,29 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
   const { handleSubmit } = methods;
   const onSubmitHandler = async (data: any) => {
     const body = {
-      contract_id: data?.contract_id,
-      client_id: data?.client_id?.name,
-      pickup_address: data?.pickup_address,
+      // client_id: data?.client_id?.name,
+      // pickup_address: data?.pickup_address,
+      // delivery_address: data?.delivery_address,
+      // scheduled_pickup_time: data?.scheduled_pickup_time.toISOString(),
+      // scheduled_delivery_time: data?.scheduled_delivery_time.toISOString(),
+      // status: data?.status,
+      billing_amount: orderValue?.billing_amount,
+      client: data?.client_id?.name,
+      completion_time: "2023-09-09T14:40:22.790943",
+      contract_id: orderValue?.contract_id,
+      creation_date: orderValue.creation_date,
       delivery_address: data?.delivery_address,
-      scheduled_pickup_time: data?.scheduled_pickup_time.toISOString(),
-      scheduled_delivery_time: data?.scheduled_delivery_time.toISOString(),
+      driver: orderValue?.driver,
+      id: orderValue?.id,
+      pickup_address: data?.pickup_address,
+      quantity_loaded: data?.quantity_loaded,
+      quantity_offloaded: data?.quantity_offloaded,
+      scheduled_delivery_time: orderValue?.scheduled_delivery_time,
+      scheduled_pickup_time: orderValue?.scheduled_pickup_time,
+      start_time: orderValue?.start_time,
       status: data?.status,
+      username: orderValue?.username,
+      vehicle: orderValue?.vehicle,
     };
     try {
       const res = await updateOrders({
@@ -95,11 +107,6 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
             methods={methods}
             onSubmit={handleSubmit(onSubmitHandler)}
           >
-            <RHFTextField
-              name="contract_id"
-              outerLabel="Contract Id"
-              placeholder="Contract Id"
-            />
             <RHFAutocompleteAsync
               name="client_id"
               outerLabel={"Client Id"}
@@ -117,21 +124,24 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
               outerLabel="Delivery Address"
               placeholder="Delivery Address"
             />
-            <RHFDatePicker
-              name="scheduled_pickup_time"
-              outerLabel="Scheduled Pickup Time"
+            <RHFTextField
+              name="quantity_loaded"
+              outerLabel="Quantity Loaded"
+              placeholder="Quantity Loaded"
             />
-            <RHFDatePicker
-              name="scheduled_delivery_time"
-              outerLabel="Scheduled Delivery Time"
+            <RHFTextField
+              name="quantity_offloaded"
+              outerLabel="Quantity OffLoaded"
+              placeholder="Quantity OffLoaded"
             />
+
             <RHFTextField
               name="status"
               outerLabel="Status"
               placeholder="Status"
             />
             <Button variant="contained" sx={{ mt: 1 }} type="submit">
-              Add Order
+              Edit Order
             </Button>
           </FormProvider>
         </Box>
