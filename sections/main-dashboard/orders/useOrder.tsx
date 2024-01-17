@@ -4,22 +4,18 @@ import {
   useDeleteOrdersMutation,
   useDriversListQuery,
   useLazyClientListQuery,
-  useLazyVehiclesListQuery,
   useOrdersListQuery,
   usePostOrdersMutation,
   useVehiclesListQuery,
 } from "@/services/order/order-api";
-import { Box, useTheme } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import { useTheme } from "@mui/material";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import EditIcon from "@mui/icons-material/Edit";
-import { OrdersModal } from "./order-modal";
-import { columnsFunction } from "./order.data";
 
 export function useOrder() {
   const theme = useTheme();
-  const [rangeState, setRangeState] = useState<any>([
+  const [rangeState, setRangeState] = useState<any[]>([
     {
       startDate: null,
       endDate: null,
@@ -32,18 +28,18 @@ export function useOrder() {
     offset: 0,
   });
   const [otherParams, setOtherParams] = useState<any>();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-  const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<
+    HTMLButtonElement | null | any
+  >(null);
+  const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
 
   const paramsData = {
     limit: 10,
     offset: params.offset,
-    period_start_date: rangeState?.[0]?.startDate,
-    period_end_date: rangeState?.[0]?.endDate,
+    period_start_date: rangeState?.[0]?.startDate?.toISOString(),
+    period_end_date: rangeState?.[0]?.endDate?.toISOString(),
     ...otherParams,
   };
 
@@ -78,23 +74,20 @@ export function useOrder() {
       status: "pending_loading",
     },
   });
-  const memoizedData = useMemo(() => {
-    return data?.data;
-  }, [data?.data]);
 
-  const numberPlate = vehiclesData?.data?.map((item: any) => {
+  const numberPlate = vehiclesData?.map((item: any) => {
     return {
       label: item?.number_plate,
       value: item?.number_plate,
     };
   });
-  const clientName = clientsData?.data?.map((item: any) => {
+  const clientName = clientsData?.map((item: any) => {
     return {
       label: item?.name,
       value: item?.name,
     };
   });
-  const driverData = driversData?.data?.map((item: any) => {
+  const driverData = driversData?.map((item: any) => {
     return {
       label: item?.name,
       value: item?.name,
@@ -132,7 +125,7 @@ export function useOrder() {
   };
 
   return {
-    memoizedData,
+    data,
     params,
     setParams,
     isLoading,

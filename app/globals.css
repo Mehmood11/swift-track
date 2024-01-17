@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -107,4 +108,12 @@ a {
 }
 ::-webkit-calendar-picker-indicator {
   filter: invert(2);
+}
+
+#search {
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid grey;
+  outline: none;
 }

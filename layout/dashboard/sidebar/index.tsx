@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Box,
   Button,
-  Divider,
   Drawer,
   Hidden,
   Typography,
@@ -15,11 +13,10 @@ import { Dashboard, Notifications } from "@mui/icons-material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 
-import { useDispatch, useSelector } from "@/store";
+import { useDispatch } from "@/store";
 import { authActions } from "@/slices";
 import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
-// import { makeStyles } from "@mui/styles";
 import { styled } from "@mui/system";
 
 const MobileDrawerStyle = styled(Drawer)((theme) => ({
@@ -236,7 +233,6 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
       <Hidden mdUp>
         <MobileDrawerStyle
           anchor="left"
-          // classes={{ paper: classes.mobileDrawer }}
           onClose={onMobileClose}
           open={openMobile}
           variant="temporary"
@@ -245,12 +241,7 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
         </MobileDrawerStyle>
       </Hidden>
       <Hidden mdDown>
-        <DesktopDrawerStyle
-          anchor="left"
-          // sx={{ paper: classes.desktopDrawer }}
-          open
-          variant="persistent"
-        >
+        <DesktopDrawerStyle anchor="left" open variant="persistent">
           {content}
         </DesktopDrawerStyle>
       </Hidden>

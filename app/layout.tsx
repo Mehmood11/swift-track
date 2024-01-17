@@ -6,7 +6,13 @@ import { Settings } from "@/components/types/settings";
 import { cookies } from "next/headers";
 import { NProgress } from "@/components/nprogress";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+const latoFont = Lato({
+  weight: ["300", "400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--lato",
+});
 
 export const metadata: Metadata = {
   title: "Swift Track",
@@ -46,7 +52,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={latoFont.className}>
         <Layout settings={settings}>
           {children}
           <NProgress />

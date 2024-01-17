@@ -1,13 +1,26 @@
 "use client";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import { LineChart } from "./line-chart";
 import { DonutChart } from "./donut-chart";
 import { useLazyDashboardListQuery } from "@/services/dashboard/dashboard-api";
+import { LoadingButton } from "@mui/lab";
+import { useEffect, useState } from "react";
 
 export function Dashboard(): JSX.Element {
-  const [revenueChartTrigger, { data }] = useLazyDashboardListQuery();
+  const [revenueChartTrigger, { data, isLoading }] =
+    useLazyDashboardListQuery();
   console.log(data);
+  // useEffect to trigger the API call on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      // Trigger the API call when the component is mounted
+      await revenueChartTrigger({ type: "month" });
+    };
+
+    fetchData();
+  }, []); // The empty dependency array ensures that this effect runs only once on mount
+
   return (
     <Box>
       <Typography variant="h5">KPI</Typography>
@@ -108,7 +121,7 @@ export function Dashboard(): JSX.Element {
       </Grid>
       <Grid
         container
-        mt={2}
+        mt={1}
         sx={{ flexWrap: { lg: "nowrap", md: "inherit" } }}
         gap={1}
       >
@@ -133,26 +146,28 @@ export function Dashboard(): JSX.Element {
               display={"flex"}
               justifyContent={"flex-end"}
             >
-              <Button
-                variant="contained"
-                onClick={async () =>
-                  await revenueChartTrigger({ type: "month" })
-                }
+              <LoadingButton
+                loading={isLoading}
+                variant={data?.type === "month" ? "contained" : "outlined"}
+                onClick={async () => {
+                  await revenueChartTrigger({ type: "month" });
+                }}
               >
-                Monthly
-              </Button>
-              <Button
-                variant="contained"
+                Month
+              </LoadingButton>
+              <LoadingButton
+                loading={isLoading}
+                variant={data?.type === "week" ? "contained" : "outlined"}
                 sx={{ ml: 1 }}
                 onClick={async () =>
                   await revenueChartTrigger({ type: "week" })
                 }
               >
-                Weekly
-              </Button>
+                Week
+              </LoadingButton>
             </Grid>
           </Grid>
-          <LineChart data={data} />
+          <LineChart data={data?.data} type={data?.type} />
         </Grid>
         <Grid
           item

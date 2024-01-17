@@ -7,7 +7,8 @@ import { useLazyRefreshQuery } from "@/services/auth/auth-api";
 import { useDispatch, useSelector } from "@/store";
 import { Settings } from "@/components/types/settings";
 import { authActions } from "@/slices";
-
+import mainLogo from "../assets/main-logo.png";
+import Image from "next/image";
 interface AuthProviderProps {
   children: ReactNode;
   handleTheme: (settings: Settings) => void;
@@ -53,7 +54,11 @@ export function AuthInitializer(props: AuthProviderProps): JSX.Element {
   }, [loginAs]);
 
   if (isLoading || !isInitialized) {
-    return <SplashScreen>Loading...</SplashScreen>;
+    return (
+      <SplashScreen>
+        <Image src={mainLogo} alt="main-logo" />
+      </SplashScreen>
+    );
   }
 
   return <>{children}</>;

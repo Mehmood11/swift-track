@@ -43,14 +43,21 @@ export function ReportsSection(): JSX.Element {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: { xs: "start", sm: "flex-end" },
           alignItems: "center",
+          // position: "relative",
+          mb: { xs: 2, sm: 3 },
         }}
       >
-        <Typography variant="h2" color={"primary.main"} mb={2}>
-          Reports
-        </Typography>
-        <Button variant="contained" onClick={handleOpen}>
+        <Button
+          variant="contained"
+          onClick={handleOpen}
+          sx={{
+            position: { xs: "auto", sm: "absolute" },
+            top: { xs: "18%", xl: "15%" },
+            mt: { xs: 1.5, sm: 0 },
+          }}
+        >
           Generate Report
         </Button>
         <Modal

@@ -28,7 +28,7 @@ const style = {
 
 export function OrdersSection(): JSX.Element {
   const {
-    memoizedData,
+    data,
     params,
     setParams,
     isLoading,
@@ -64,14 +64,21 @@ export function OrdersSection(): JSX.Element {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: { xs: "start", sm: "flex-end" },
           alignItems: "center",
+          // position: "relative",
+          mb: { xs: 2, sm: 3 },
         }}
       >
-        <Typography variant="h2" color={"primary.main"} mb={2}>
-          Order
-        </Typography>
-        <Button variant="contained" onClick={handleOpen}>
+        <Button
+          variant="contained"
+          onClick={handleOpen}
+          sx={{
+            position: { xs: "auto", sm: "absolute" },
+            top: { xs: "18%", xl: "15%" },
+            mt: { xs: 1.5, sm: 0 },
+          }}
+        >
           Add Order
         </Button>
         <Modal
@@ -190,15 +197,15 @@ export function OrdersSection(): JSX.Element {
       </Box>
 
       <CustomTable
-        data={memoizedData?.order}
+        data={data?.data?.order}
         columns={columns}
         isLoading={isLoading}
         isFetching={isFetching}
         isError={isError}
         isSuccess={isSuccess}
         isPagination
-        totalPages={memoizedData?.meta?.pages ?? 0}
-        currentPage={memoizedData?.meta?.page ?? 1}
+        totalPages={data?.data?.meta?.pages ?? 0}
+        currentPage={data?.data?.meta?.page ?? 1}
         onPageChange={(onPageData: any) => {
           setParams({
             page: onPageData,

@@ -3,14 +3,14 @@ import type { RootState } from "@/store";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const REPORTS: any = "REPORTS";
 export const ORDERS: any = "ORDERS";
+export const PROFILE: any = "PROFILE";
 
-const TAGS: any = [REPORTS, ORDERS];
+const TAGS: any = [REPORTS, ORDERS, PROFILE];
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.accessToken;
-    console.log(getState());
 
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);

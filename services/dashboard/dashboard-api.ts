@@ -6,9 +6,11 @@ export const dashboardApi = baseApi.injectEndpoints({
       query: ({ type }) => ({
         url: `revenue?type=${type}`,
         method: "GET",
+        params: { type },
       }),
     }),
   }),
 });
 
-export const { useDashboardListQuery , useLazyDashboardListQuery} = dashboardApi;
+export const { useDashboardListQuery, useLazyDashboardListQuery } =
+  dashboardApi;

@@ -38,18 +38,27 @@ export const orderApi = baseApi.injectEndpoints({
         url: `vehicles?is_page=false`,
         method: "GET",
       }),
+      transformResponse: (response: any) => {
+        return typeof response === "object" ? response?.data : [];
+      },
     }),
     clientList: builder.query({
       query: () => ({
         url: "clients?is_page=false",
         method: "GET",
       }),
+      transformResponse: (response: any) => {
+        return typeof response === "object" ? response?.data : [];
+      },
     }),
     driversList: builder.query({
       query: () => ({
         url: "drivers?is_page=false",
         method: "GET",
       }),
+      transformResponse: (response: any) => {
+        return typeof response === "object" ? response?.data : [];
+      },
     }),
   }),
 });

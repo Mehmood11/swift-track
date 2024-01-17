@@ -34,8 +34,6 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state: any, action: any): any => {
-  console.log("action in store", action);
-
   // Clear all data in redux store to initial.
   if (action.type === "auth/logout") {
     state = undefined;

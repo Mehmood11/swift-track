@@ -1,18 +1,15 @@
+import React from "react";
 import { FormProvider } from "@/components/rhf/form-provider";
 import { RHFAutocompleteAsync } from "@/components/rhf/rhf-autocomplete-async";
-import { RHFDatePicker } from "@/components/rhf/rhf-date-picker";
 import { RHFTextField } from "@/components/rhf/rhf-textfield";
 import {
   useLazyClientListQuery,
-  usePostOrdersMutation,
   useUpdateOrdersMutation,
 } from "@/services/order/order-api";
 import { Box, Button, Modal } from "@mui/material";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import EditIcon from "@mui/icons-material/Edit";
-import React from "react";
-import { parseISO } from "date-fns";
 
 const style = {
   position: "absolute" as "absolute",
@@ -35,7 +32,6 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
 
   const clientList = useLazyClientListQuery();
   const [updateOrders] = useUpdateOrdersMutation();
-  console.log("orderValue", orderValue);
 
   // status, shipping address,  vehicle no, quantity loaded or offloaded.
   const methods = useForm({
@@ -52,12 +48,6 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
   const { handleSubmit } = methods;
   const onSubmitHandler = async (data: any) => {
     const body = {
-      // client_id: data?.client_id?.name,
-      // pickup_address: data?.pickup_address,
-      // delivery_address: data?.delivery_address,
-      // scheduled_pickup_time: data?.scheduled_pickup_time.toISOString(),
-      // scheduled_delivery_time: data?.scheduled_delivery_time.toISOString(),
-      // status: data?.status,
       billing_amount: orderValue?.billing_amount,
       client: data?.client_id?.name,
       completion_time: "2023-09-09T14:40:22.790943",

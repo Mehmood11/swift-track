@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
 import React, { useState } from "react";
-import { Stack } from "@mui/material";
+import { Box, Breadcrumbs, Stack, Typography } from "@mui/material";
 import { Sidebar } from "./sidebar";
 import { Header } from "./header";
 import { makeStyles } from "@mui/styles";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles((theme: any) => ({
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
-    paddingTop: 50,
+    paddingTop: 30,
     marginTop: 50,
     [theme.breakpoints.up("md")]: {
       paddingLeft: 256,
@@ -69,41 +72,68 @@ const DashboardLayout = ({
   children: ReactNode;
 }): JSX.Element => {
   const classes = useStyles();
-
+  const pathname = usePathname();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <Stack sx={{ minHeight: "100vh" }}>
-      <div
-        // sx={{
-        //   display: "flex",
-        //   height: "100%",
-        //   overflow: "hidden",
-        //   width: "100%",
-        //   backgroundColor: "white",
-        // }}
-        className={classes.root}
-      >
+      <div className={classes.root}>
         <Header onMobileNavOpen={() => setMobileNavOpen(true)} />
+
         <Sidebar
           onMobileClose={() => setMobileNavOpen(false)}
           openMobile={isMobileNavOpen}
         />
-        {/* <Box
-          sx={{
-            mt:10,
-            paddingLeft: { xs: 0, md: 20 },
-            display: "flex",
-            flex: "1 1 auto",
-            height: '100vh'
-          }}
-        >
-          {children}
-        </Box> */}
         <div className={classes.wrapper}>
           <div className={classes.contentContainer}>
             <div className={classes.content}>
-              <div className={classes.mainArea}>{children}</div>
+              <div className={classes.mainArea}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Typography
+                    variant="h4"
+                    sx={{ color: "primary.main", textTransform: "capitalize" }}
+                  >
+                    {pathname.slice(1)}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      listStyle: "none",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Breadcrumbs
+                      aria-label="breadcrumb"
+                      separator={<ChevronRightIcon />}
+                    >
+                      <Link
+                        href={"/dashboard"}
+                        passHref
+                        style={{
+                          textDecoration: "none",
+                          marginRight: 4,
+                          color: "primary.main",
+                        }}
+                      >
+                        Swift Track
+                      </Link>
+
+                      <Typography sx={{ textTransform: "capitalize" }}>
+                        {pathname.slice(1)}
+                      </Typography>
+                    </Breadcrumbs>
+                  </Box>
+                </Box>
+                {children}
+              </div>
             </div>
           </div>
         </div>

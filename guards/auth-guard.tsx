@@ -1,6 +1,9 @@
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import mainLogo from "../assets/main-logo.png";
+import { Box } from "@mui/material";
 
 export function AuthGuard(props: any) {
   const { children } = props;
@@ -26,7 +29,11 @@ export function AuthGuard(props: any) {
   }, [check]);
 
   if (checked) {
-    return <>Loading...</>;
+    return (
+      <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <Image src={mainLogo} alt="main-logo" />
+      </Box>
+    );
   }
 
   // If got here, it means that the redirect did not occur, and that tells us that the user is

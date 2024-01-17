@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
-export function LineChart({ data }: any): JSX.Element {
+export function LineChart({ data, type }: any): JSX.Element {
   const [chartState, setChartState] = useState<any>({
     series: [
       {
@@ -94,17 +94,18 @@ export function LineChart({ data }: any): JSX.Element {
     if (data) {
       const newSeries = [
         {
-          name: "monthly",
-          data: data.map((val: any) => val?.y),
+          name: type,
+          data: data.map((val: any) => val?.y?.toFixed(2)),
         },
       ];
-
+      const xAxis = data.map((val: any) => val?.x);
       setChartState((prevChartState: any) => ({
         ...prevChartState,
         series: newSeries,
+        xaxis: { categories: xAxis },
       }));
     }
-  }, [data]);
+  }, [data, type]);
   return (
     <Chart
       options={chartState}

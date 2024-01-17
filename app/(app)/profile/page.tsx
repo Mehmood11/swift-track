@@ -1,8 +1,8 @@
 import React from "react";
-import { ProfileSection } from "@/sections/main-dashboard/profile";
+import { MainProfile } from "@/sections/main-dashboard/profile/main-profile";
 
 const page = () => {
-  return <ProfileSection />;
+  return <MainProfile />;
 };
 
 export default page;

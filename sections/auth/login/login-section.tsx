@@ -1,6 +1,6 @@
 import { Box, Button, Typography, Grid } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-import Divider from "@mui/material/Divider";
+// import Divider from "@mui/material/Divider";
 import { FormProvider } from "@/components/rhf/form-provider";
 import { RHFTextField } from "@/components/rhf/rhf-textfield";
 import { useForm } from "react-hook-form";
@@ -42,13 +42,8 @@ export function LoginSection(): JSX.Element {
   const loginHandler = async (data: any) => {
     try {
       const res: any = await loginMutation(data).unwrap();
-
       toast.success(res?.message ?? `Update Successfully!`);
-
-      console.log(res);
     } catch (error: any) {
-      console.log(error);
-
       toast.error(error?.data?.message ?? "Something went wrong");
     }
   };
@@ -84,7 +79,7 @@ export function LoginSection(): JSX.Element {
           <PersonIcon sx={{ fontSize: "3.5rem" }} />
           <Typography variant="h5">Login</Typography>
         </Box>
-        <Divider component="li" light />
+        {/* <Divider component="li" light /> */}
 
         <FormProvider methods={methods} onSubmit={handleSubmit(loginHandler)}>
           <Grid container>
