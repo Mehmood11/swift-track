@@ -1,7 +1,9 @@
+import { useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import Chart from "react-apexcharts";
 
 export function LineChart({ data, type }: any): JSX.Element {
+  const theme = useTheme();
   const [chartState, setChartState] = useState<any>({
     series: [
       {
@@ -16,18 +18,13 @@ export function LineChart({ data, type }: any): JSX.Element {
         enabled: false,
       },
       dropShadow: {
-        enabled: true,
-        color: "#000",
-        top: 18,
-        left: 7,
-        blur: 10,
-        opacity: 0.2,
+        enabled: false,
       },
       toolbar: {
         show: false,
       },
     },
-    colors: ["#77B6EA", "#545454"],
+    // colors: [theme.palette.primary.main],
     // dataLabels: {
     //   enabled: true,
     // },
@@ -102,10 +99,11 @@ export function LineChart({ data, type }: any): JSX.Element {
       setChartState((prevChartState: any) => ({
         ...prevChartState,
         series: newSeries,
+        colors: [theme.palette.primary.main],
         xaxis: { categories: xAxis },
       }));
     }
-  }, [data, type]);
+  }, [data, type, theme]);
   return (
     <Chart
       options={chartState}

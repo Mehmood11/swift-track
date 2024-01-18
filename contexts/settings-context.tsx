@@ -6,14 +6,10 @@ import {
 import { createContext } from "react";
 
 export const defaultSettings: Settings = {
-  direction: "ltr",
-  layout: "vertical",
   responsiveFontSizes: false,
   colorPreset: "purple",
   contrast: "normal",
-  navColor: "evident",
   paletteMode: "light",
-  stretch: false,
   disableButtonsOnLoginAs: false,
 };
 

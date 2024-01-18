@@ -24,6 +24,14 @@ const style = {
   borderRadius: "8px",
   height: "600px",
   overflowY: "auto",
+  maxHeight: { xs: 500, sm: 600, lg: 700 },
+  "&::-webkit-scrollbar": {
+    width: "8px",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "primary.main",
+    borderRadius: "6px",
+  },
 };
 
 export function OrdersSection(): JSX.Element {
@@ -48,7 +56,6 @@ export function OrdersSection(): JSX.Element {
     openPop,
     id,
     setOtherParams,
-    refetch,
     methods,
     onSubmitHandler,
     handleSubmit,
@@ -66,21 +73,41 @@ export function OrdersSection(): JSX.Element {
           display: "flex",
           justifyContent: { xs: "start", sm: "flex-end" },
           alignItems: "center",
-          // position: "relative",
-          mb: { xs: 2, sm: 3 },
         }}
       >
         <Button
-          variant="contained"
-          onClick={handleOpen}
-          sx={{
-            position: { xs: "auto", sm: "absolute" },
-            top: { xs: "18%", xl: "15%" },
-            mt: { xs: 1.5, sm: 0 },
-          }}
+          aria-describedby={id}
+          onClick={handleClick}
+          variant="outlined"
+          sx={{ mr: 1 }}
         >
+          Apply Date Range
+        </Button>
+        <Button variant="contained" onClick={handleOpen}>
           Add Order
         </Button>
+        <Popover
+          id={id}
+          open={openPop}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <DateRange
+            editableDateInputs={true}
+            onChange={(item: any) => {
+              setRangeState([item?.selection]);
+            }}
+            moveRangeOnFirstSelection={false}
+            ranges={rangeState}
+            color={theme?.palette?.primary?.main}
+            rangeColors={[theme?.palette?.primary?.main]}
+          />
+        </Popover>
+
         <Modal
           open={open}
           onClose={handleCloseModal}
@@ -143,6 +170,13 @@ export function OrdersSection(): JSX.Element {
         }}
         tableHeaderData={[
           {
+            type: "search",
+            FieldProps: {
+              name: "search",
+              placeholder: "Search",
+            },
+          },
+          {
             type: "select",
             FieldProps: {
               name: "client_name",
@@ -168,33 +202,6 @@ export function OrdersSection(): JSX.Element {
           },
         ]}
       />
-      <Box mb={2} mt={1}>
-        <Button aria-describedby={id} onClick={handleClick} variant="outlined">
-          Apply Date Range
-        </Button>
-        <Popover
-          id={id}
-          open={openPop}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-        >
-          <DateRange
-            editableDateInputs={true}
-            onChange={(item: any) => {
-              setRangeState([item?.selection]);
-              refetch();
-            }}
-            moveRangeOnFirstSelection={false}
-            ranges={rangeState}
-            color={theme?.palette?.primary?.main}
-            rangeColors={[theme?.palette?.primary?.main]}
-          />
-        </Popover>
-      </Box>
 
       <CustomTable
         data={data?.data?.order}
@@ -209,9 +216,10 @@ export function OrdersSection(): JSX.Element {
         onPageChange={(onPageData: any) => {
           setParams({
             page: onPageData,
-            offset: (onPageData - 1) * 10,
+            offset: (onPageData - 1) * 20,
           });
         }}
+        rootSX={{ mt: 1 }}
       />
     </>
   );

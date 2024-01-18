@@ -1,10 +1,13 @@
 "use client";
 import CustomTable from "@/components/custom-table";
 import { useReport } from "./useReport";
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Popover } from "@mui/material";
 import { FormProvider } from "@/components/rhf/form-provider";
-import { RHFAutocompleteAsync } from "@/components/rhf/rhf-autocomplete-async";
 import { RHFCustomSelect } from "@/components/rhf/rhf-custom-select";
+import { TableHeader } from "@/components/custom-table/table-header";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css";
 
 const style = {
   position: "absolute" as "absolute",
@@ -32,34 +35,60 @@ export function ReportsSection(): JSX.Element {
     handleClose,
     handleOpen,
     methods,
-    numberPlate,
-    clientNames,
-    driverNames,
     handleSubmit,
     onSubmitHandler,
+    setOtherParams,
+    clientName,
+    rangeState,
+    setRangeState,
+    anchorEl,
+    handleAnchorClose,
+    handleClick,
+    openPop,
+    id,
+    theme,
   } = useReport();
   return (
     <>
       <Box
         sx={{
           display: "flex",
-          justifyContent: { xs: "start", sm: "flex-end" },
-          alignItems: "center",
-          // position: "relative",
-          mb: { xs: 2, sm: 3 },
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          position: { xs: "auto", lg: "absolute" },
+          top: { xs: "13%", xl: "13%" },
+          right: 35,
+          mt: { xs: 1.5, sm: 0 },
         }}
       >
-        <Button
-          variant="contained"
-          onClick={handleOpen}
-          sx={{
-            position: { xs: "auto", sm: "absolute" },
-            top: { xs: "18%", xl: "15%" },
-            mt: { xs: 1.5, sm: 0 },
-          }}
-        >
+        <Button onClick={handleClick} variant="outlined" sx={{ mr: 1 }}>
+          Apply Date Range
+        </Button>
+        <Button variant="contained" onClick={handleOpen}>
           Generate Report
         </Button>
+        <Popover
+          id={id}
+          open={openPop}
+          anchorEl={anchorEl}
+          onClose={handleAnchorClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+        >
+          <DateRange
+            editableDateInputs={true}
+            onChange={(item: any) => {
+              setRangeState([item?.selection]);
+            }}
+            moveRangeOnFirstSelection={false}
+            ranges={rangeState}
+            color={theme?.palette?.primary?.main}
+            rangeColors={[theme?.palette?.primary?.main]}
+          />
+        </Popover>
+
         <Modal
           open={open}
           onClose={handleClose}
@@ -79,34 +108,41 @@ export function ReportsSection(): JSX.Element {
                   { id: 2, label: "Monthly", value: "monthly" },
                 ]}
               />
-              <RHFAutocompleteAsync
-                name="client_name"
-                outerLabel={"Job"}
-                placeholder={"Job"}
-                apiQuery={clientNames}
-                getOptionLabel={(option: any) => option.name}
-              />
-              <RHFAutocompleteAsync
-                name="number_plate"
-                outerLabel={"Number Plate"}
-                placeholder={"Number Plate"}
-                apiQuery={numberPlate}
-                getOptionLabel={(option: any) => option.name}
-              />
-              <RHFAutocompleteAsync
-                name="driver_name"
-                outerLabel={"Driver Name"}
-                placeholder={"Driver Name"}
-                apiQuery={driverNames}
-                getOptionLabel={(option: any) => option.name}
-              />
+
               <Button variant="contained" sx={{ mt: 1 }} type="submit">
-                Apply Filter
+                Generate Report
               </Button>
             </FormProvider>
           </Box>
         </Modal>
       </Box>
+
+      <TableHeader
+        gridProps={{
+          lg: 2.8,
+        }}
+        onChanged={(e: any) => {
+          setOtherParams(e);
+        }}
+        tableHeaderData={[
+          {
+            type: "search",
+            FieldProps: {
+              name: "search",
+              placeholder: "Search",
+            },
+          },
+          {
+            type: "select",
+            FieldProps: {
+              name: "client_name",
+              label: "Client Name",
+            },
+            options: clientName ?? [],
+          },
+        ]}
+      />
+
       <CustomTable
         data={data?.data?.report}
         columns={columns}
@@ -123,6 +159,7 @@ export function ReportsSection(): JSX.Element {
             offset: (onPageData - 1) * 10,
           });
         }}
+        rootSX={{ mt: 1 }}
       />
     </>
   );

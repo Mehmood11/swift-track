@@ -33,14 +33,10 @@ export function SettingsProvider(props: SettingsProviderProps): JSX.Element {
   const handleUpdate = useCallback(
     (newSettings: Settings): void => {
       onUpdate({
-        direction: settings.direction,
-        layout: settings.layout,
         responsiveFontSizes: settings.responsiveFontSizes,
         colorPreset: settings.colorPreset,
         contrast: settings.contrast,
-        navColor: settings.navColor,
         paletteMode: settings.paletteMode,
-        stretch: settings.stretch,
         disableButtonsOnLoginAs: settings.disableButtonsOnLoginAs,
         ...newSettings,
       });
@@ -74,13 +70,9 @@ export function SettingsProvider(props: SettingsProviderProps): JSX.Element {
 
   const isCustom = useMemo(() => {
     return !isEqual(defaultSettings, {
-      direction: settings.direction,
-      layout: settings.layout,
       responsiveFontSizes: settings.responsiveFontSizes,
-      stretch: settings.stretch,
       colorPreset: settings.colorPreset,
       contrast: settings.contrast,
-      navColor: settings.navColor,
       paletteMode: settings.paletteMode,
     });
   }, [settings]);

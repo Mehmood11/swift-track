@@ -3,10 +3,10 @@ import { REPORTS, baseApi } from "../base-api";
 export const reportsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     reportsList: builder.query({
-      query: ({ params }: any) => ({
+      query: ({ paramsData }: any) => ({
         url: "reports",
         method: "GET",
-        params,
+        params: paramsData,
       }),
       providesTags: [REPORTS],
     }),

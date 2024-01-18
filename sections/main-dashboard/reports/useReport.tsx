@@ -1,5 +1,6 @@
 "use client";
 import {
+  useClientListQuery,
   useLazyClientListQuery,
   useLazyDriversListQuery,
   useLazyVehiclesListQuery,
@@ -9,26 +10,44 @@ import {
   useDeleteReportMutation,
   useReportsListQuery,
 } from "@/services/reports/reports-api";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import DeleteIcon from "@mui/icons-material/Delete";
 import toast from "react-hot-toast";
 
 export function useReport(): any {
+  const theme = useTheme();
   const [params, setParams] = useState<any>({
     page: 1,
     offset: 0,
   });
+  const [anchorEl, setAnchorEl] = React.useState<
+    HTMLButtonElement | null | any
+  >(null);
+  const [rangeState, setRangeState] = useState<any[]>([
+    {
+      startDate: null,
+      endDate: null,
+      key: "selection",
+    },
+  ]);
   const [open, setOpen] = React.useState(false);
+  const [otherParams, setOtherParams] = useState<any>();
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const paramsData = {
+    limit: 10,
+    offset: params.offset,
+    period_start_date: rangeState?.[0]?.startDate?.toISOString(),
+    period_end_date: rangeState?.[0]?.endDate?.toISOString(),
+    ...otherParams,
+  };
+
   const { data, isLoading, isFetching, isError, isSuccess }: any =
-    useReportsListQuery({ params });
-  const numberPlate = useLazyVehiclesListQuery();
-  const clientNames = useLazyClientListQuery();
-  const driverNames = useLazyDriversListQuery();
+    useReportsListQuery({ paramsData });
+  const { data: clientsData }: any = useClientListQuery(null);
   const [deleteReport] = useDeleteReportMutation();
   const [applyFilterReport] = useApplyFilterReportMutation();
 
@@ -60,7 +79,6 @@ export function useReport(): any {
   };
 
   const deleteHandler = async (id: any) => {
-    console.log(id);
     try {
       const res = await deleteReport({ id }).unwrap();
       toast.success(res?.message ?? "deleted successfully");
@@ -68,6 +86,25 @@ export function useReport(): any {
       toast.error(error?.data?.error ?? "Something went wrong");
     }
   };
+
+  const clientName = clientsData?.map((item: any) => {
+    return {
+      id: item?.id,
+      label: item?.name,
+      value: item?.name,
+    };
+  });
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleAnchorClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openPop = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const columns = [
     {
@@ -99,8 +136,8 @@ export function useReport(): any {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.generated_by ?? "-",
-      id: "generated_by",
+      accessorFn: (row: any) => row.id ?? "-",
+      id: "id",
       cell: (info: any) => (
         <>
           <DeleteIcon
@@ -126,11 +163,18 @@ export function useReport(): any {
     open,
     handleClose,
     handleOpen,
+    setOtherParams,
     methods,
-    numberPlate,
-    clientNames,
-    driverNames,
     handleSubmit,
     onSubmitHandler,
+    clientName,
+    rangeState,
+    setRangeState,
+    anchorEl,
+    handleAnchorClose,
+    handleClick,
+    openPop,
+    id,
+    theme,
   };
 }

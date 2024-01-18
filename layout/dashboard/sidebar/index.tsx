@@ -12,12 +12,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Dashboard, Notifications } from "@mui/icons-material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-
 import { useDispatch } from "@/store";
 import { authActions } from "@/slices";
 import toast from "react-hot-toast";
 import { usePathname, useRouter } from "next/navigation";
 import { styled } from "@mui/system";
+import { SettingsConsumer } from "@/contexts";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Logo } from "@/assets/logo";
 
 const MobileDrawerStyle = styled(Drawer)((theme) => ({
   mobileDrawer: {
@@ -131,91 +133,109 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
       justifyContent="space-between"
       flexDirection="column"
     >
-      <Box p={2} display="flex" justifyContent="center">
-        <Link href="/dashboard">
-          <Box
-            sx={{
-              cursor: "pointer",
-              fontWeight: 700,
-            }}
-          >
-            {/* <Image src={SidebarLogo} alt="Indentity Gram" /> */}
-            Swift Track
-          </Box>
-        </Link>
-      </Box>
-      <Box
-        p={"0px  24px 5px"}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          rowGap: 1,
-          justifyContent: "flex-start",
-        }}
-      >
-        {sidebarLinks.map((config: any) => (
-          <Box
-            key={config.id}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              padding: "10px",
-              borderRadius: "6px",
-              backgroundColor:
-                pathname == config.href ||
-                pathname?.includes(config?.value.toLocaleLowerCase())
-                  ? "primary.main"
-                  : "",
-            }}
-          >
-            <Link
-              style={{
-                color:
-                  theme.palette.mode === "dark"
-                    ? "white"
-                    : theme.palette.neutral[900],
-                textDecoration: "none",
-                fontWeight: "500",
-                fontSize: "16px",
+      <Box>
+        <Box pt={2} display="flex" justifyContent="center">
+          <Link href="/dashboard">
+            <Box
+              sx={{
+                cursor: "pointer",
+                fontWeight: 700,
+              }}
+            >
+              <Logo />
+            </Box>
+          </Link>
+        </Box>
+        <Box
+          p={"0px  24px 5px"}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            rowGap: 1,
+            justifyContent: "flex-start",
+          }}
+          mt={2}
+        >
+          {sidebarLinks.map((config: any) => (
+            <Box
+              key={config.id}
+              sx={{
                 display: "flex",
                 alignItems: "center",
-                padding: "0px 18px",
+                padding: "10px",
+                borderRadius: "6px",
+                backgroundColor:
+                  pathname == config.href ||
+                  pathname?.includes(config?.value.toLocaleLowerCase())
+                    ? "primary.main"
+                    : "",
               }}
-              passHref
-              href={config.href}
             >
-              {config.icon()}
-              <Typography
-                sx={{
-                  pl: 1,
-                  fontSize: "16px",
-                  fontWeight: 600,
+              <Link
+                style={{
                   color:
-                    pathname == config.href || theme.palette.mode === "dark"
+                    theme.palette.mode === "dark"
                       ? "white"
-                      : theme.palette.neutral[800],
+                      : theme.palette.neutral[900],
+                  textDecoration: "none",
+                  fontWeight: "500",
+                  fontSize: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0px 18px",
                 }}
+                passHref
+                href={config.href}
               >
-                {config.title}
-              </Typography>
-            </Link>
-          </Box>
-        ))}
+                {config.icon()}
+                <Typography
+                  sx={{
+                    pl: 1,
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    color:
+                      pathname == config.href || theme.palette.mode === "dark"
+                        ? "white"
+                        : theme.palette.neutral[800],
+                  }}
+                >
+                  {config.title}
+                </Typography>
+              </Link>
+            </Box>
+          ))}
+        </Box>
       </Box>
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
           alignSelf: "center",
+          flexDirection: "column",
           mb: 5,
           width: "80%",
           color: "white",
           fontSize: "16px",
           fontWeight: "500",
           borderRadius: "6px",
-          backgroundColor: "primary.main",
+          // backgroundColor: "primary.main",
         }}
       >
+        <SettingsConsumer>
+          {(themeProvider) => {
+            return (
+              <Button
+                startIcon={<SettingsIcon />}
+                variant="contained"
+                onClick={() => themeProvider.handleDrawerOpen()}
+                fullWidth
+                sx={{ mb: 1 }}
+              >
+                Setting
+              </Button>
+            );
+          }}
+        </SettingsConsumer>
         <Button
           startIcon={<LogoutIcon />}
           variant="contained"

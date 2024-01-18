@@ -26,7 +26,7 @@ export function RHFAutocompleteAsync({
   apiQuery,
   queryKey = "search",
   debounceTime = 500,
-  getOptionId = (option: any) => option.id,
+  // getOptionId = (option: any) => option.id,
   getOptionLabel = (option: any) => option.name,
   isOptionEqualToValue = (option: any, newValue: any) =>
     option.id === newValue.id,
@@ -38,25 +38,23 @@ export function RHFAutocompleteAsync({
   StartIcon,
   externalParams = {},
   transformResponse = (res: any) => res,
-  renderOption = (props: any, option: any, { selected }: any) => {
-    return (
-      <li {...props} key={getOptionId(option)}>
-        <Checkbox
-          key={getOptionId(option)}
+  renderOption = (props: any, option: any, { selected }: any) => (
+    <li {...props} key={option.id}>
+      {/* <Checkbox
+          key={option.id}
           icon={icon}
           checkedIcon={checkedIcon}
           style={{ marginRight: 8 }}
           checked={selected}
-        />
-        {getOptionLabel(option)}
-      </li>
-    );
-  },
+        /> */}
+      {getOptionLabel(option)}
+    </li>
+  ),
   renderTags = (tagValue: any, getTagProps: any) => {
     return tagValue.map((option: any, index: any) => (
       <Chip
         {...getTagProps({ index })}
-        key={getOptionId(option)}
+        key={option.id}
         label={getOptionLabel(option)}
       />
     ));

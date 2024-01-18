@@ -6,7 +6,6 @@ import { Header } from "./header";
 import { makeStyles } from "@mui/styles";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -72,7 +71,6 @@ const DashboardLayout = ({
   children: ReactNode;
 }): JSX.Element => {
   const classes = useStyles();
-  const pathname = usePathname();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
@@ -88,50 +86,7 @@ const DashboardLayout = ({
           <div className={classes.contentContainer}>
             <div className={classes.content}>
               <div className={classes.mainArea}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-start",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{ color: "primary.main", textTransform: "capitalize" }}
-                  >
-                    {pathname.slice(1)}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      listStyle: "none",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Breadcrumbs
-                      aria-label="breadcrumb"
-                      separator={<ChevronRightIcon />}
-                    >
-                      <Link
-                        href={"/dashboard"}
-                        passHref
-                        style={{
-                          textDecoration: "none",
-                          marginRight: 4,
-                          color: "primary.main",
-                        }}
-                      >
-                        Swift Track
-                      </Link>
-
-                      <Typography sx={{ textTransform: "capitalize" }}>
-                        {pathname.slice(1)}
-                      </Typography>
-                    </Breadcrumbs>
-                  </Box>
-                </Box>
+                
                 {children}
               </div>
             </div>

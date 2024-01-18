@@ -7,14 +7,10 @@ import {
   InputAdornment,
   MenuItem,
   TextField,
-  Autocomplete,
   Button,
   FormControlLabel,
 } from "@mui/material";
-// import { DatePicker } from "@mui/x-date-pickers";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import SearchIcon from "@mui/icons-material/Search";
 
 const getDefaultParams: any = ({ tableHeaderData }: any) => {
@@ -24,9 +20,6 @@ const getDefaultParams: any = ({ tableHeaderData }: any) => {
   });
   return defaultParams;
 };
-
-const Icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const CheckedIcon = <CheckBoxIcon fontSize="small" />;
 
 // ----------------------------------------------------------------------
 let timer: ReturnType<typeof setTimeout>;
@@ -66,14 +59,6 @@ export function TableHeader(props: any): JSX.Element {
         onChanged(updatedParams);
       }
 
-      return updatedParams;
-    });
-  }
-
-  function autoCompleteChangeHandler(value: any, name: any): void {
-    setParams((oldParams: any) => {
-      const updatedParams = { ...oldParams, [name]: value };
-      onChanged(updatedParams);
       return updatedParams;
     });
   }
@@ -179,9 +164,9 @@ export function TableHeader(props: any): JSX.Element {
                     onChange={(e) => changeHandler(e, data.type)}
                     {...data.FieldProps}
                   >
-                    {data.options.map(({ label, value }: any) => (
+                    {data.options.map(({ label, value, id }: any) => (
                       <MenuItem
-                        key={value}
+                        key={id}
                         value={value}
                         sx={{ fontSize: "1.5rem" }}
                       >
@@ -189,58 +174,6 @@ export function TableHeader(props: any): JSX.Element {
                       </MenuItem>
                     ))}
                   </TextField>
-                </Grid>
-              );
-            } else if (data.type === "multiselect") {
-              return (
-                <Grid
-                  key={data.FieldProps.name}
-                  xs={12}
-                  md={3.5}
-                  lg={2}
-                  flexWrap="wrap"
-                  justifyContent="center"
-                  item
-                  {...gridProps}
-                >
-                  <Autocomplete
-                    multiple
-                    limitTags={1}
-                    size="small"
-                    fullWidth
-                    id="checkboxes-tags-demo"
-                    options={data.options}
-                    disableCloseOnSelect
-                    sx={{
-                      "& .MuiButtonBase-root": {
-                        height: "unset !important",
-                      },
-                    }}
-                    onChange={(e, value) => {
-                      autoCompleteChangeHandler(value, data.FieldProps.name);
-                    }}
-                    renderOption={(prop, options: any, { selected }) => (
-                      <MenuItem {...prop} sx={{ fontSize: "1.5rem" }}>
-                        <Checkbox
-                          icon={Icon}
-                          checkedIcon={CheckedIcon}
-                          style={{ marginRight: 8 }}
-                          checked={selected}
-                        />
-                        {options.label}
-                      </MenuItem>
-                    )}
-                    renderInput={(param) => {
-                      return (
-                        <TextField
-                          variant="outlined"
-                          name={data.FieldProps.name}
-                          label={data.FieldProps.label}
-                          {...param}
-                        />
-                      );
-                    }}
-                  />
                 </Grid>
               );
             } else if (data.type === "date") {

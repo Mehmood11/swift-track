@@ -9,25 +9,29 @@ import {
   Grid,
   useTheme,
   Popover,
-  Button,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Breadcrumbs,
+  Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PersonIcon from "@mui/icons-material/Person";
 import { authActions } from "@/slices";
 import { useDispatch } from "@/store";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { UserButton } from "@/assets/user-button";
 
 export function Header({ onMobileNavOpen }: any): JSX.Element {
   const theme = useTheme();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -47,10 +51,10 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
 
   return (
     <AppBar
-      elevation={1}
+      elevation={0}
       sx={{
         maxWidth: "100%",
-        backgroundColor: "background.paper",
+        backgroundColor: "transparent",
       }}
     >
       <Toolbar sx={{ color: "#8B8B8B", p: 2 }}>
@@ -79,7 +83,7 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
             lg={12}
             sx={{
               ml: { xl: "40px", lg: "40px", md: "40px" },
-              mr: { xl: "20px", lg: "20px", md: "20px" },
+              mr: { xl: "10px", lg: "10px", md: "10px" },
               display: "flex",
               justifyContent: { xs: "flex-end", sm: "space-between" },
               alignItems: "center",
@@ -93,28 +97,58 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
                 ml: { xl: "33px" },
               }}
             >
-              <input
-                type="text"
-                placeholder="search"
-                id="search"
-                style={{
-                  color: theme.palette.mode === "dark" ? "white" : "black",
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  flexDirection: "column",
                 }}
-              />
+              >
+                <Typography
+                  variant="h4"
+                  sx={{ color: "primary.main", textTransform: "capitalize" }}
+                >
+                  {pathname.slice(1)}
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    listStyle: "none",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Breadcrumbs
+                    aria-label="breadcrumb"
+                    separator={<ChevronRightIcon />}
+                  >
+                    <Link
+                      href={"/dashboard"}
+                      passHref
+                      style={{
+                        textDecoration: "none",
+                        marginRight: 4,
+                        color: "primary.main",
+                      }}
+                    >
+                      Swift Track
+                    </Link>
+
+                    <Typography sx={{ textTransform: "capitalize" }}>
+                      {pathname.slice(1)}
+                    </Typography>
+                  </Breadcrumbs>
+                </Box>
+              </Box>
             </Box>
             <Box
               sx={{
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? theme.palette.background.default
-                    : theme.palette.background.paper,
-                // boxShadow: (theme) => theme.customShadows.primary,
-                boxShadow: "0px 0px 10px 6px rgba(112, 144, 176, 0.08)",
                 borderRadius: "8px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                px: 2,
+                px: 0,
                 py: 0,
                 minHeight: "40px",
               }}
@@ -125,7 +159,8 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
                   display: "flex",
                 }}
               >
-                <NotificationsIcon />
+                <NotificationsIcon sx={{ mr: 1.4, mt: 0.7 }} />
+                <UserButton onClick={handleClick} />
               </Box>
               {open && (
                 <Popover
@@ -170,9 +205,6 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
                   </List>
                 </Popover>
               )}
-              <Button aria-describedby={id} onClick={handleClick} sx={{ p: 0 }}>
-                <PersonIcon />
-              </Button>
             </Box>
           </Grid>
         </Grid>

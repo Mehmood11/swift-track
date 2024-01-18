@@ -36,14 +36,14 @@ export function useOrder() {
   const handleCloseModal = () => setOpen(false);
 
   const paramsData = {
-    limit: 10,
+    limit: 20,
     offset: params.offset,
     period_start_date: rangeState?.[0]?.startDate?.toISOString(),
     period_end_date: rangeState?.[0]?.endDate?.toISOString(),
     ...otherParams,
   };
 
-  const { data, isLoading, isFetching, isError, isSuccess, refetch }: any =
+  const { data, isLoading, isFetching, isError, isSuccess }: any =
     useOrdersListQuery({ paramsData });
   const { data: vehiclesData }: any = useVehiclesListQuery(null);
   const clientList = useLazyClientListQuery();
@@ -77,18 +77,21 @@ export function useOrder() {
 
   const numberPlate = vehiclesData?.map((item: any) => {
     return {
+      id: item?.id,
       label: item?.number_plate,
       value: item?.number_plate,
     };
   });
   const clientName = clientsData?.map((item: any) => {
     return {
+      id: item?.id,
       label: item?.name,
       value: item?.name,
     };
   });
   const driverData = driversData?.map((item: any) => {
     return {
+      id: item?.id,
       label: item?.name,
       value: item?.name,
     };
@@ -145,7 +148,6 @@ export function useOrder() {
     openPop,
     id,
     setOtherParams,
-    refetch,
     methods,
     onSubmitHandler,
     handleSubmit,

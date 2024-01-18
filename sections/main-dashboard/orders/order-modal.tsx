@@ -32,8 +32,7 @@ export function OrdersModal({ orderValue }: any): JSX.Element {
 
   const clientList = useLazyClientListQuery();
   const [updateOrders] = useUpdateOrdersMutation();
-
-  // status, shipping address,  vehicle no, quantity loaded or offloaded.
+  
   const methods = useForm({
     defaultValues: {
       client_id: null,

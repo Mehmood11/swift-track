@@ -111,8 +111,8 @@ export const columnsFunction = (deleteOrders: any) => {
       isSortable: false,
     },
     {
-      accessorFn: (row: any) => row.generated_by ?? "-",
-      id: "generated_by",
+      accessorFn: (row: any) => row.id ?? "-",
+      id: "id",
       cell: (info: any) => (
         <div style={{ display: "flex" }}>
           <OrdersModal orderValue={info?.row?.original} />

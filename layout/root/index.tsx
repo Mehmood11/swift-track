@@ -75,7 +75,6 @@ export function Layout(props: LayoutProps): JSX.Element {
               <SettingsConsumer>
                 {(themeSettings) => {
                   const theme: Theme = createTheme({
-                    direction: themeSettings.direction,
                     responsiveFontSizes: themeSettings.responsiveFontSizes,
                     colorPreset: themeSettings.colorPreset,
                     contrast: themeSettings.contrast,
@@ -96,10 +95,10 @@ export function Layout(props: LayoutProps): JSX.Element {
                       <CssBaseline />
                       <AuthInitializer handleTheme={themeSettings.handleUpdate}>
                         {children}
-
+                        {/* 
                         <SettingsButton
                           onClick={themeSettings.handleDrawerOpen}
-                        />
+                        /> */}
                         <SettingsDrawer
                           canReset={themeSettings.isCustom}
                           onClose={themeSettings.handleDrawerClose}
@@ -107,15 +106,11 @@ export function Layout(props: LayoutProps): JSX.Element {
                           onUpdate={themeSettings.handleUpdate}
                           open={themeSettings.openDrawer}
                           values={{
-                            direction: themeSettings.direction,
                             responsiveFontSizes:
                               themeSettings.responsiveFontSizes,
-                            stretch: themeSettings.stretch,
-                            layout: themeSettings.layout,
                             colorPreset: themeSettings.colorPreset,
                             contrast: themeSettings.contrast,
                             paletteMode: themeSettings.paletteMode,
-                            navColor: themeSettings.navColor,
                           }}
                         />
                       </AuthInitializer>
