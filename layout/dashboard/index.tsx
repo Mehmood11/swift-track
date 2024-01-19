@@ -19,8 +19,8 @@ const useStyles = makeStyles((theme: any) => ({
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
-    paddingTop: 30,
-    marginTop: 50,
+    paddingTop: 50,
+    marginTop: 65,
     [theme.breakpoints.up("md")]: {
       paddingLeft: 256,
       paddingRight: 25,
@@ -85,10 +85,7 @@ const DashboardLayout = ({
         <div className={classes.wrapper}>
           <div className={classes.contentContainer}>
             <div className={classes.content}>
-              <div className={classes.mainArea}>
-                
-                {children}
-              </div>
+              <div className={classes.mainArea}>{children}</div>
             </div>
           </div>
         </div>

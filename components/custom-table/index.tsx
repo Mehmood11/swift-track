@@ -180,7 +180,7 @@ const CustomTable = ({
             {isSuccess && Boolean(table?.getRowModel()?.rows?.length) && (
               <Box sx={styles.currentPageBox}>
                 {isPagination && (
-                  <Box>
+                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     <Pagination
                       sx={styles.pagination}
                       renderItem={(item) => (

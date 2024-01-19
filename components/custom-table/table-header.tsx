@@ -36,6 +36,9 @@ export function TableHeader(props: any): JSX.Element {
     filterButtonProps,
     showClearFilterButton,
     gridProps,
+    dateRangeHandler,
+    generateReportHandler,
+    isReport,
   } = props;
 
   const [params, setParams] = useState<any>(
@@ -261,6 +264,33 @@ export function TableHeader(props: any): JSX.Element {
                 disableTouchRipple
               >
                 Clear Filters
+              </Button>
+            </Grid>
+          )}
+          {isReport && (
+            <Grid
+              xs={12}
+              md={6}
+              display="flex"
+              // flexWrap="wrap"
+              justifyContent={"flex-start"}
+              alignItems={"center"}
+              flexDirection={"row"}
+              item
+              // ml="auto"
+              // mr={4}
+              height="auto"
+              // {...gridProps}
+            >
+              <Button
+                onClick={dateRangeHandler}
+                variant="outlined"
+                sx={{ mr: 1 }}
+              >
+                Apply Date Range
+              </Button>
+              <Button variant="contained" onClick={generateReportHandler}>
+                Generate Report
               </Button>
             </Grid>
           )}

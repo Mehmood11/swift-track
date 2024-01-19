@@ -77,6 +77,7 @@ export const styles = {
     my: "15px",
     px: "25px",
     alignItems: "center",
+    justifyContent: "flex-end",
   },
   currentPage: (theme: any) => ({
     color: theme.palette.grey[600],

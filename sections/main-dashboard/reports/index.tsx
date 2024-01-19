@@ -61,12 +61,12 @@ export function ReportsSection(): JSX.Element {
           mt: { xs: 1.5, sm: 0 },
         }}
       >
-        <Button onClick={handleClick} variant="outlined" sx={{ mr: 1 }}>
+        {/* <Button onClick={handleClick} variant="outlined" sx={{ mr: 1 }}>
           Apply Date Range
         </Button>
         <Button variant="contained" onClick={handleOpen}>
           Generate Report
-        </Button>
+        </Button> */}
         <Popover
           id={id}
           open={openPop}
@@ -141,6 +141,9 @@ export function ReportsSection(): JSX.Element {
             options: clientName ?? [],
           },
         ]}
+        dateRangeHandler={handleClick}
+        generateReportHandler={handleOpen}
+        isReport
       />
 
       <CustomTable
