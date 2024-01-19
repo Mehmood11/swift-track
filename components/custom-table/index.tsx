@@ -27,7 +27,8 @@ import { IsFetching } from "./is-fetching";
 import { NoContentFound } from "./no-content-found";
 import { TableSkeleton } from "./table-skeleton";
 import { CustomTableProps } from "./custom-table.types";
-
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // ----------------------------------------------------------------------
 // constant
 const EMPTY_ARRAY: [] = [];
@@ -186,15 +187,15 @@ const CustomTable = ({
                       renderItem={(item) => (
                         <PaginationItem
                           slots={{
-                            previous: () => <>Previous</>,
-                            next: () => <>Next</>,
+                            previous: () => <ChevronLeftIcon />,
+                            next: () => <ChevronRightIcon />,
                           }}
                           {...item}
                         />
                       )}
                       size="small"
                       variant="outlined"
-                      shape="rounded"
+                      // shape="circle"
                       count={totalPages}
                       page={currentPage}
                       onChange={(e, page) => {

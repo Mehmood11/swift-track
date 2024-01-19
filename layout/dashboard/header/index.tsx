@@ -54,7 +54,7 @@ export function Header({ onMobileNavOpen }: any): JSX.Element {
       elevation={0}
       sx={{
         maxWidth: "100%",
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Toolbar sx={{ color: "#8B8B8B", p: 2 }}>

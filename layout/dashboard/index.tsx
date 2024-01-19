@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: any) => ({
     },
   },
   mainArea: {
-    height: "84vh",
+    // height: "84vh",
     overflowY: "auto",
     padding: "10px",
     "&::-webkit-scrollbar": { width: "7px", cursor: "pointer" },
