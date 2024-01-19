@@ -100,7 +100,29 @@ export function LineChart({ data, type }: any): JSX.Element {
         ...prevChartState,
         series: newSeries,
         colors: [theme.palette.primary.main],
-        xaxis: { categories: xAxis },
+        xaxis: {
+          categories: xAxis,
+          labels: {
+            style: {
+              colors: theme.palette.text.primary,
+            },
+          },
+        },
+        yaxis: {
+          labels: {
+            style: {
+              colors: [theme.palette.text.primary],
+            },
+          },
+        },
+        tooltip: {
+          fillSeriesColor: true,
+          labels: {
+            style: {
+              colors: [theme.palette.text.primary],
+            },
+          },
+        },
       }));
     }
   }, [data, type, theme]);

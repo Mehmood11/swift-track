@@ -117,3 +117,6 @@ a {
   border: 1px solid grey;
   outline: none;
 }
+.apexcharts-tooltip {
+  color: black;
+}

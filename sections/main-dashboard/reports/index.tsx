@@ -50,72 +50,54 @@ export function ReportsSection(): JSX.Element {
   } = useReport();
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          position: { xs: "auto", lg: "absolute" },
-          top: { xs: "13%", xl: "13%" },
-          right: 35,
-          mt: { xs: 1.5, sm: 0 },
+      <Popover
+        id={id}
+        open={openPop}
+        anchorEl={anchorEl}
+        onClose={handleAnchorClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
         }}
       >
-        {/* <Button onClick={handleClick} variant="outlined" sx={{ mr: 1 }}>
-          Apply Date Range
-        </Button>
-        <Button variant="contained" onClick={handleOpen}>
-          Generate Report
-        </Button> */}
-        <Popover
-          id={id}
-          open={openPop}
-          anchorEl={anchorEl}
-          onClose={handleAnchorClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
+        <DateRange
+          editableDateInputs={true}
+          onChange={(item: any) => {
+            setRangeState([item?.selection]);
           }}
-        >
-          <DateRange
-            editableDateInputs={true}
-            onChange={(item: any) => {
-              setRangeState([item?.selection]);
-            }}
-            moveRangeOnFirstSelection={false}
-            ranges={rangeState}
-            color={theme?.palette?.primary?.main}
-            rangeColors={[theme?.palette?.primary?.main]}
-          />
-        </Popover>
+          moveRangeOnFirstSelection={false}
+          ranges={rangeState}
+          color={theme?.palette?.primary?.main}
+          rangeColors={[theme?.palette?.primary?.main]}
+        />
+      </Popover>
 
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <FormProvider
-              methods={methods}
-              onSubmit={handleSubmit(onSubmitHandler)}
-            >
-              <RHFCustomSelect
-                name="type"
-                outerLabel="Type"
-                options={[
-                  { id: 1, label: "Weekly", value: "weekly" },
-                  { id: 2, label: "Monthly", value: "monthly" },
-                ]}
-              />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <FormProvider
+            methods={methods}
+            onSubmit={handleSubmit(onSubmitHandler)}
+          >
+            <RHFCustomSelect
+              name="type"
+              outerLabel="Type"
+              options={[
+                { id: 1, label: "Weekly", value: "weekly" },
+                { id: 2, label: "Monthly", value: "monthly" },
+              ]}
+            />
 
-              <Button variant="contained" sx={{ mt: 1 }} type="submit">
-                Generate Report
-              </Button>
-            </FormProvider>
-          </Box>
-        </Modal>
-      </Box>
+            <Button variant="contained" sx={{ mt: 1 }} type="submit">
+              Generate Report
+            </Button>
+          </FormProvider>
+        </Box>
+      </Modal>
 
       <TableHeader
         gridProps={{

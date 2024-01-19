@@ -270,7 +270,7 @@ export function TableHeader(props: any): JSX.Element {
           {isReport && (
             <Grid
               xs={12}
-              md={6}
+              md={4}
               display="flex"
               // flexWrap="wrap"
               justifyContent={"flex-start"}
@@ -279,17 +279,23 @@ export function TableHeader(props: any): JSX.Element {
               item
               // ml="auto"
               // mr={4}
-              height="auto"
+              // height="auto"
               // {...gridProps}
             >
               <Button
                 onClick={dateRangeHandler}
                 variant="outlined"
-                sx={{ mr: 1 }}
+                size="small"
+                sx={{ mr: 1, fontSize: "11px" }}
               >
                 Apply Date Range
               </Button>
-              <Button variant="contained" onClick={generateReportHandler}>
+              <Button
+                variant="contained"
+                onClick={generateReportHandler}
+                size="small"
+                sx={{ fontSize: "11px" }}
+              >
                 Generate Report
               </Button>
             </Grid>
