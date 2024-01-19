@@ -123,7 +123,7 @@ export function Dashboard(): JSX.Element {
         container
         mt={2}
         sx={{ flexWrap: { lg: "nowrap", md: "inherit" } }}
-        gap={1}
+        gap={2}
       >
         <Grid
           item
