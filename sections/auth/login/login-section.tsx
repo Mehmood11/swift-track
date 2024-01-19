@@ -100,7 +100,10 @@ export function LoginSection(): JSX.Element {
             </Grid>
             <Grid item xs={12} mt={2} sx={{ color: "black" }}>
               <Typography variant="body1">
-                Don't have an account ? <Link href={"/sign-up"}>Sign Up</Link>
+                Don't have an account ?{" "}
+                <Link href={"/sign-up"} style={{ color: "blue" }}>
+                  Sign Up
+                </Link>
               </Typography>
             </Grid>
             <Grid item xs={12} mt={2}>

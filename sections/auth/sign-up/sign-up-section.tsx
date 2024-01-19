@@ -114,7 +114,7 @@ export function SignUpSection(): JSX.Element {
             </Grid>
             <Grid item xs={12} mt={2} sx={{ color: "black" }}>
               <Typography variant="body1">
-                Already have an account ? <Link href={"/login"}>Login</Link>
+                Already have an account ? <Link href={"/login"} style={{ color: "blue" }}>Login</Link>
               </Typography>
             </Grid>
             <Grid item xs={12} mt={2}>
