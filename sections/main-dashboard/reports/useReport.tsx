@@ -38,7 +38,7 @@ export function useReport(): any {
   const handleClose = () => setOpen(false);
 
   const paramsData = {
-    limit: 10,
+    limit: 20,
     offset: params.offset,
     period_start_date: rangeState?.[0]?.startDate?.toISOString(),
     period_end_date: rangeState?.[0]?.endDate?.toISOString(),

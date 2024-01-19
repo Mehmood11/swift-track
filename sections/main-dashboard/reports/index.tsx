@@ -141,7 +141,7 @@ export function ReportsSection(): JSX.Element {
         onPageChange={(onPageData: any) => {
           setParams({
             page: onPageData,
-            offset: (onPageData - 1) * 10,
+            offset: (onPageData - 1) * 20,
           });
         }}
         rootSX={{ mt: 1 }}
