@@ -26,7 +26,7 @@ export function Dashboard(): JSX.Element {
       <Typography variant="h5">KPI</Typography>
       <Grid
         container
-        gap={1}
+        gap={2}
         mt={2}
         sx={{ flexWrap: { lg: "nowrap", md: "inherit" } }}
       >
@@ -121,7 +121,7 @@ export function Dashboard(): JSX.Element {
       </Grid>
       <Grid
         container
-        mt={1}
+        mt={2}
         sx={{ flexWrap: { lg: "nowrap", md: "inherit" } }}
         gap={1}
       >

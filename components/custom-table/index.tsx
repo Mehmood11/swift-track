@@ -197,6 +197,8 @@ const CustomTable = ({
                       variant="outlined"
                       // shape="circle"
                       count={totalPages}
+                      showLastButton
+                      showFirstButton
                       page={currentPage}
                       onChange={(e, page) => {
                         onPageChange(page);
