@@ -1,6 +1,5 @@
 import { Box, Typography, Grid } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
-// import Divider from "@mui/material/Divider";
 import { FormProvider } from "@/components/rhf/form-provider";
 import { RHFTextField } from "@/components/rhf/rhf-textfield";
 import { useForm } from "react-hook-form";
@@ -86,7 +85,6 @@ export function SignUpSection(): JSX.Element {
           <PersonIcon sx={{ fontSize: "3.5rem" }} />
           <Typography variant="h5">Register</Typography>
         </Box>
-        {/* <Divider component="li" light /> */}
 
         <FormProvider methods={methods} onSubmit={handleSubmit(loginHandler)}>
           <Grid container>
@@ -114,7 +112,10 @@ export function SignUpSection(): JSX.Element {
             </Grid>
             <Grid item xs={12} mt={2} sx={{ color: "black" }}>
               <Typography variant="body1">
-                Already have an account ? <Link href={"/login"} style={{ color: "blue" }}>Login</Link>
+                Already have an account ?{" "}
+                <Link href={"/login"} style={{ color: "blue" }}>
+                  Login
+                </Link>
               </Typography>
             </Grid>
             <Grid item xs={12} mt={2}>

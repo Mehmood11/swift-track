@@ -37,7 +37,6 @@ const style = {
 export function OrdersSection(): JSX.Element {
   const {
     data,
-    params,
     setParams,
     isLoading,
     isFetching,

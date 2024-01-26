@@ -218,7 +218,6 @@ export const Sidebar = ({ openMobile, onMobileClose }: any): JSX.Element => {
           fontSize: "16px",
           fontWeight: "500",
           borderRadius: "6px",
-          // backgroundColor: "primary.main",
         }}
       >
         <SettingsConsumer>

@@ -7,7 +7,6 @@ const initialState = {
   isAuthenticated: false,
   accessToken: null,
   refreshToken: null,
-  user: {},
 };
 
 const slice = createSlice({
@@ -16,7 +15,6 @@ const slice = createSlice({
   reducers: {
     logout: (state) => {
       state.isAuthenticated = initialState.isAuthenticated;
-      state.user = initialState.user;
     },
   },
   extraReducers: (builder) => {

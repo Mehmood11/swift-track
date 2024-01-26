@@ -6,9 +6,8 @@ import { Settings } from "@/components/types/settings";
 import { cookies } from "next/headers";
 import { NProgress } from "@/components/nprogress";
 
-// const inter = Inter({ subsets: ["latin"] });
 const latoFont = Lato({
-  weight: ["300", "400", "700"],
+  weight: ["300", "400", "700", "900"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   variable: "--lato",

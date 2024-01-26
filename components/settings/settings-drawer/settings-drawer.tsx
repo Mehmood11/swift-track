@@ -14,7 +14,7 @@ import { OptionsColorPreset } from "./options-color-preset";
 import { OptionsContrast } from "./options-contrast";
 import { OptionsColorScheme } from "./options-color-scheme";
 import { Settings } from "@/components/types/settings";
-import { Scrollbar } from "@/components/scrollbar";
+import { Box } from "@mui/material";
 
 interface SettingsDrawerProps {
   canReset?: boolean;
@@ -66,7 +66,7 @@ export function SettingsDrawer(props: SettingsDrawerProps): JSX.Element {
       }}
       {...other}
     >
-      <Scrollbar
+      <Box
         sx={{
           height: "100%",
           "& .simplebar-content": {
@@ -142,7 +142,7 @@ export function SettingsDrawer(props: SettingsDrawerProps): JSX.Element {
             value={values.contrast}
           />
         </Stack>
-      </Scrollbar>
+      </Box>
     </Drawer>
   );
 }

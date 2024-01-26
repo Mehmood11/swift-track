@@ -40,13 +40,6 @@ export function RHFAutocompleteAsync({
   transformResponse = (res: any) => res,
   renderOption = (props: any, option: any, { selected }: any) => (
     <li {...props} key={option.id}>
-      {/* <Checkbox
-          key={option.id}
-          icon={icon}
-          checkedIcon={checkedIcon}
-          style={{ marginRight: 8 }}
-          checked={selected}
-        /> */}
       {getOptionLabel(option)}
     </li>
   ),

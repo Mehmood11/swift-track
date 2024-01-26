@@ -6,9 +6,7 @@ import { TableCell, TableRow, tableCellClasses } from "@mui/material";
 // STYLED COMPONENTS
 export const StyledTableCell = styled(TableCell)((theme: any) => ({
   [`&.${tableCellClasses.head}`]: {
-    // background: theme.palette.background.paper,
     height: 48,
-    // color: theme.palette,
     textAlign: "center",
     fontWeight: 650,
     textTransform: "capitalize",
@@ -82,7 +80,6 @@ export const styles = {
   currentPage: (theme: any) => ({
     color: theme.palette.grey[600],
     fontSize: "12px",
-    // fontFamily: theme.typography.fontFamily,
   }),
   error: (theme: any) => ({
     background: theme.palette.background.default,

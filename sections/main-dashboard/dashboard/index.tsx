@@ -183,18 +183,6 @@ export function Dashboard(): JSX.Element {
             <Grid item xs={12} md={6}>
               <Typography variant="h5">Total Orders</Typography>
             </Grid>
-            {/* <Grid
-              item
-              xs={12}
-              md={6}
-              display={"flex"}
-              justifyContent={"flex-end"}
-            >
-              <Button variant="contained">Monthly</Button>
-              <Button variant="contained" sx={{ ml: 1 }}>
-                Weekly
-              </Button>
-            </Grid> */}
           </Grid>
           <DonutChart />
         </Grid>

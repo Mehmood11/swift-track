@@ -12,7 +12,6 @@ export function LineChart({ data, type }: any): JSX.Element {
       },
     ],
     chart: {
-      // height: 350,
       type: "line",
       zoom: {
         enabled: false,
@@ -24,58 +23,20 @@ export function LineChart({ data, type }: any): JSX.Element {
         show: false,
       },
     },
-    // colors: [theme.palette.primary.main],
-    // dataLabels: {
-    //   enabled: true,
-    // },
     stroke: {
       curve: "smooth",
     },
-    // title: {
-    //   text: "Sales overview",
-    //   align: "left",
-    // },
-    // grid: {
-    //   borderColor: "#e7e7e7",
-    //   row: {
-    //     colors: ["#f3f3f3", "transparent"],
-    //     opacity: 0.5,
-    //   },
-    // },
     grid: {
       row: {
-        colors: ["transparent", "transparent"], // takes an array which will be repeated on columns
+        colors: ["transparent", "transparent"],
         opacity: 0.5,
       },
     },
     markers: {
       size: 1,
     },
-    xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
-      // title: {
-      //   text: "Month",
-      // },
-    },
     yaxis: {
-      // title: {
-      //   text: "Temperature",
-      // },
       min: 5,
-      // max: 150,
     },
     legend: {
       position: "top",
@@ -85,14 +46,15 @@ export function LineChart({ data, type }: any): JSX.Element {
       offsetX: -5,
     },
   });
-  // const chartOptions = ;
   useEffect(() => {
     // Update the series data with the loaded chartData
     if (data) {
       const newSeries = [
         {
           name: type,
-          data: data.map((val: any) => val?.y?.toFixed(2)),
+          data: data.map((val: any) =>
+            parseInt(val?.y.toString().split(".")[0])
+          ),
         },
       ];
       const xAxis = data.map((val: any) => val?.x);
@@ -111,6 +73,7 @@ export function LineChart({ data, type }: any): JSX.Element {
         yaxis: {
           labels: {
             style: {
+              fontSize: "13px",
               colors: [theme.palette.text.primary],
             },
           },

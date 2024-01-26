@@ -8,7 +8,6 @@ export const loginSuccess = (state: any, action: LoginAction): void => {
 
   state.accessToken = access_token;
   state.refreshToken = refresh_token;
-  // state.user = data.user;
   state.isAuthenticated = true;
 
   setSessionStorage("accessToken", access_token);

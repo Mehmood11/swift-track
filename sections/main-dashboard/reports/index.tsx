@@ -25,7 +25,6 @@ export function ReportsSection(): JSX.Element {
   const {
     data,
     columns,
-    params,
     setParams,
     isLoading,
     isFetching,

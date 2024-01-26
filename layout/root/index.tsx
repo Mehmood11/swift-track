@@ -11,7 +11,6 @@ import Head from "next/head";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 //Others
@@ -95,10 +94,6 @@ export function Layout(props: LayoutProps): JSX.Element {
                       <CssBaseline />
                       <AuthInitializer handleTheme={themeSettings.handleUpdate}>
                         {children}
-                        {/* 
-                        <SettingsButton
-                          onClick={themeSettings.handleDrawerOpen}
-                        /> */}
                         <SettingsDrawer
                           canReset={themeSettings.isCustom}
                           onClose={themeSettings.handleDrawerClose}

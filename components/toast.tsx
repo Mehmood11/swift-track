@@ -8,13 +8,11 @@ export function Toaster(): JSX.Element {
       toastOptions={{
         duration: 5000,
         success: {
-          //   icon: <ToastSuccessIcon />,
           style: {
             background: "green",
           },
         },
         error: {
-          //   icon: <ToastErrorIcon />,
           style: {
             background: "red",
           },

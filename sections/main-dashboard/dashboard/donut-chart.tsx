@@ -4,10 +4,7 @@ import Chart from "react-apexcharts";
 export function DonutChart() {
   const [chartOptions, setChartOptions] = useState<any>({
     series: [12, 11, 14, 18, 17, 13],
-
-    // options: {
     chart: {
-      //   width: 380,
       type: "donut",
     },
     plotOptions: {
@@ -27,16 +24,10 @@ export function DonutChart() {
         return val + " - " + opts.w.globals.series[opts.seriesIndex];
       },
     },
-    // title: {
-    //   text: "Total Orders ",
-    // },
     responsive: [
       {
         breakpoint: 480,
         options: {
-          //   chart: {
-          //     width: 200,
-          //   },
           legend: {
             position: "top",
             horizontalAlign: "right",

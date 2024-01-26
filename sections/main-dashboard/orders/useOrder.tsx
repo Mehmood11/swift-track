@@ -129,7 +129,6 @@ export function useOrder() {
 
   return {
     data,
-    params,
     setParams,
     isLoading,
     isFetching,

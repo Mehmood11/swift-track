@@ -1,7 +1,5 @@
 import type { ReactElement } from "react";
-// import Moon01Icon from "@untitled-ui/icons-react/build/esm/Moon01";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-// import SunIcon from "@untitled-ui/icons-react/build/esm/Sun";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";

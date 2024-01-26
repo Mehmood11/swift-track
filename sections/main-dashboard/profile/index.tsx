@@ -42,20 +42,9 @@ export function ProfileSection({ data }: any) {
             display: "flex",
             justifyContent: { xs: "start", sm: "flex-end" },
             alignItems: "center",
-            // position: "relative",
-            mb: { xs: 2, sm: 3 },
           }}
         >
-          <LoadingButton
-            variant="contained"
-            sx={{
-              position: { xs: "auto", sm: "absolute" },
-              top: { xs: "18%", xl: "15%" },
-              mt: { xs: 1.5, sm: 0 },
-            }}
-          >
-            Update
-          </LoadingButton>
+          <LoadingButton variant="contained">Update</LoadingButton>
         </Grid>
         <Grid item xs={12} md={6}>
           <RHFTextField
