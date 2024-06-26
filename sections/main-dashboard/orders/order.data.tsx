@@ -125,7 +125,7 @@ export const columnsFunction = (deleteOrders: any) => {
                 }).unwrap();
                 toast.success(res?.message ?? "Order Deleted successfully");
               } catch (error: any) {
-                toast.success(error?.data?.message ?? "Something went wrong");
+                toast.error(error?.data?.message ?? "Something went wrong");
               }
             }}
           />

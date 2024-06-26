@@ -16,6 +16,9 @@ const slice = createSlice({
     logout: (state) => {
       state.isAuthenticated = initialState.isAuthenticated;
     },
+    isAuthenticatedUser: (state) => {
+      state.isAuthenticated = true;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, loginSuccess);

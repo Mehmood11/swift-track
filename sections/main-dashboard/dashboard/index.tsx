@@ -43,12 +43,12 @@ export function Dashboard(): JSX.Element {
         >
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
             <Typography variant="h6" sx={{ color: "" }}>
-              Avg Delivery
+              Total Delivery
             </Typography>
             <ArrowCircleUpIcon sx={{ ml: 1 }} />
           </Box>
           <Typography variant="h4" mt={2}>
-            3243
+            100
           </Typography>
           <Typography variant="body1">Current Count</Typography>
         </Grid>
@@ -70,7 +70,7 @@ export function Dashboard(): JSX.Element {
             <ArrowCircleUpIcon sx={{ ml: 1 }} />
           </Box>
           <Typography variant="h4" mt={2}>
-            3243
+            32
           </Typography>
           <Typography variant="body1">Current Count</Typography>
         </Grid>
@@ -87,12 +87,12 @@ export function Dashboard(): JSX.Element {
         >
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
             <Typography variant="h6" sx={{ color: "" }}>
-              Avg Delivery
+              KSI Delivery
             </Typography>
             <ArrowCircleUpIcon sx={{ ml: 1 }} />
           </Box>
           <Typography variant="h4" mt={2}>
-            3243
+            03
           </Typography>
           <Typography variant="body1">Current Count</Typography>
         </Grid>
@@ -109,12 +109,12 @@ export function Dashboard(): JSX.Element {
         >
           <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
             <Typography variant="h6" sx={{ color: "" }}>
-              Avg Delivery
+              Swift Delivery
             </Typography>
             <ArrowCircleUpIcon sx={{ ml: 1 }} />
           </Box>
           <Typography variant="h4" mt={2}>
-            3243
+            65
           </Typography>
           <Typography variant="body1">Current Count</Typography>
         </Grid>

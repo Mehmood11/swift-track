@@ -8,7 +8,7 @@ export function LineChart({ data, type }: any): JSX.Element {
     series: [
       {
         name: "monthly",
-        data: [],
+        data: [12, 21, 6, 4, 12, 54, 5, 10],
       },
     ],
     chart: {

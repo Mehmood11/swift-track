@@ -12,6 +12,26 @@ import { RHFTextField } from "@/components/rhf/rhf-textfield";
 import { RHFDatePicker } from "@/components/rhf/rhf-date-picker";
 import { columnsFunction } from "./order.data";
 
+const orderData = [
+  {
+    id: 1,
+    billing_amount: 12,
+    client_name: "John Smith",
+    completion_time: 3000,
+    contract_id: "12JDS23",
+    creation_date: "2000, 1, 1",
+    delivery_address: "123 Main Street",
+    delivery_name: "John Smith Chair",
+    pickup_address: "123 Main Street Road",
+    quantity_loaded: 122,
+    quantity_offloaded: 221,
+    scheduled_delivery_time: "2000, 3, 2",
+    start_time: "2020, 1, 4",
+    status: "success",
+    vehicle_no: 123,
+  },
+];
+
 const style = {
   position: "absolute" as "absolute",
   top: "50%",
@@ -203,12 +223,12 @@ export function OrdersSection(): JSX.Element {
       />
 
       <CustomTable
-        data={data?.data?.order}
+        data={orderData}
         columns={columns}
-        isLoading={isLoading}
-        isFetching={isFetching}
-        isError={isError}
-        isSuccess={isSuccess}
+        // isLoading={isLoading}
+        // isFetching={isFetching}
+        // isError={isError}
+        isSuccess={true}
         isPagination
         totalPages={data?.data?.meta?.pages ?? 0}
         currentPage={data?.data?.meta?.page ?? 1}
